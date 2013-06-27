@@ -7,7 +7,7 @@ namespace AXNAEngine.com.axna.ui
         private readonly TextString _text;
 
         public TextLabel(TextString text, float x, float y, int width = 0, int height = 0)
-            : base(text, x, y, width, height)
+            : base(text, x, y)
         {
             _text = text;
         }

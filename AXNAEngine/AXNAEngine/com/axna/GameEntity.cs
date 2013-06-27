@@ -7,7 +7,7 @@ namespace AXNAEngine.com.axna
     public class GameEntity : EngineEntity
     {
         public float Angle;
-        public Graphics Graphic;
+        public Graphic Graphic;
         public Rectangle Hitbox;
 
         public bool IsActive = true;
@@ -62,19 +62,42 @@ namespace AXNAEngine.com.axna
 
         public Rectangle GetEntityRectangle()
         {
-            var entityRectangle =
-                new Rectangle(
-                    (int) Position.X + Hitbox.X, (int) Position.Y + Hitbox.Y, Hitbox.Width, Hitbox.Height);
+            Rectangle entityRectangle = new Rectangle(
+                (int) Position.X + Hitbox.X,
+                (int) Position.Y + Hitbox.Y,
+                Hitbox.Width,
+                Hitbox.Height);
 
             return entityRectangle;
         }
 
         #endregion
 
-        protected GameEntity(Graphics graphics, float x, float y, int width, int height)
+        #region initialization functions
+
+        /// <summary>
+        ///     Sets the Entity's hitbox properties.
+        /// </summary>
+        /// <param name="width"> Width of the hitbox.</param>
+        /// <param name="height">Height of the hitbox.</param>
+        /// <param name="originX">X origin of the hitbox.</param>
+        /// <param name="originY">Y origin of the hitbox.</param>
+        public void SetHitbox(int width = 0, int height = 0, int originX = 0, int originY = 0)
         {
-            Graphic = graphics;
-            Hitbox = new Rectangle(0, 0, width, height);
+            Hitbox = new Rectangle(originX, originY, width, height);
+        }
+
+        #endregion
+
+        /// <summary>
+        ///     Creates new Entity
+        /// </summary>
+        /// <param name="graphic"></param>
+        /// <param name="x">X position of entity</param>
+        /// <param name="y">Y position of entity</param>
+        public GameEntity(Graphic graphic, float x, float y)
+        {
+            Graphic = graphic;
             Position = new Vector2(x, y);
         }
     }

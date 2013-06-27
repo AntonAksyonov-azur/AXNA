@@ -3,7 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AXNAEngine.com.axna.graphics
 {
-    public class Image : Graphics
+    /// <summary>
+    /// Изображение, поддерживающее эффекты трансформации
+    /// Повороты, искажения размера, перекрытие цвета, отражение
+    /// </summary>
+    public class Image : Graphic
     {
         public float Scale { get; private set; }
         public float Angle { get; private set; }
@@ -22,7 +26,8 @@ namespace AXNAEngine.com.axna.graphics
         {
             if (!IsVisible) return;
 
-            spriteBatch.Draw(Texture,
+            spriteBatch.Draw(
+                Texture,
                 GetDrawPosition(position) + Origin,
                 null,
                 GetColor(),
@@ -88,10 +93,10 @@ namespace AXNAEngine.com.axna.graphics
         /// <summary>
         /// Устанавливает угол поворота текстуры изображения. Значение должно быть указано в градусах
         /// </summary>
-        /// <param name="degree"></param>
-        public void SetRotationAngleByDegrees(int degree)
+        /// <param name="degrees"></param>
+        public void SetRotationAngleByDegrees(int degrees)
         {
-            Angle = degree * MathHelper.Pi / 180;
+            Angle = degrees * MathHelper.Pi / 180;
         }
         #endregion
 

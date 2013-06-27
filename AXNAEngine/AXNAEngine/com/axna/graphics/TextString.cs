@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AXNAEngine.com.axna.graphics
 {
-    public class TextString : Graphics
+    public class TextString : Graphic
     {
         public SpriteFont SpriteFont;
         public String Text;

@@ -6,7 +6,7 @@ namespace AXNAEngine.com.axna.graphics
     /// <summary>
     /// Простой класс для отрисовки 2d текстур без трансформаций
     /// </summary>
-    public class Stamp : Graphics
+    public class Stamp : Graphic
     {
         private readonly Texture2D _texture2D;
 

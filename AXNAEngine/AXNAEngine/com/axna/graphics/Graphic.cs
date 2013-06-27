@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AXNAEngine.com.axna.graphics
 {
-    public abstract class Graphics
+    public abstract class Graphic
     {
         public bool IsVisible = true;
         public bool IsActive = true;

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using AXNAEngine.com.axna.graphics;
 using Microsoft.Xna.Framework;
 
 namespace AXNAEngine.com.axna
 {
     public class World
     {
-        public List<GameEntity> AddList = new List<GameEntity>();
-        public List<GameEntity> Entities = new List<GameEntity>();
-        public List<GameEntity> RemoveList = new List<GameEntity>();
+        private readonly List<GameEntity> _addList = new List<GameEntity>();
+        private readonly List<GameEntity> _removeList = new List<GameEntity>();
+        private readonly List<GameEntity> _entities = new List<GameEntity>();
 
         public World(String name)
         {
@@ -21,28 +22,27 @@ namespace AXNAEngine.com.axna
 
         public void AddEntity(GameEntity gameEntity)
         {
-            AddList.Add(gameEntity);
+            _addList.Add(gameEntity);
         }
 
         public void RemoveEntity(GameEntity gameEntity)
         {
-            RemoveList.Add(gameEntity);
+            _removeList.Add(gameEntity);
         }
 
         #endregion
 
         #region Overridable Methods
 
-        public virtual bool OnInitialize()
+        public virtual void OnInitialize()
         {
-            return true;
         }
 
         public virtual void OnUpdate(GameTime gameTime)
         {
             UpdateLists();
 
-            foreach (GameEntity entity in Entities)
+            foreach (GameEntity entity in _entities)
             {
                 entity.Update(gameTime);
             }
@@ -52,7 +52,7 @@ namespace AXNAEngine.com.axna
         {
             AXNA.SpriteBatch.Begin();
 
-            foreach (GameEntity entity in Entities)
+            foreach (GameEntity entity in _entities)
             {
                 entity.Draw(gameTime);
             }
@@ -62,7 +62,7 @@ namespace AXNAEngine.com.axna
 
         public virtual void OnRemove()
         {
-            Entities.RemoveRange(0, Entities.Count);
+            _entities.RemoveRange(0, _entities.Count);
         }
 
         #endregion
@@ -72,21 +72,21 @@ namespace AXNAEngine.com.axna
         private void UpdateLists()
         {
             // Добавление
-            foreach (GameEntity entity in AddList)
+            foreach (GameEntity entity in _addList)
             {
                 entity.ParentWorld = this;
-                Entities.Add(entity);
+                _entities.Add(entity);
             }
 
             // Удаление
-            foreach (GameEntity entity in RemoveList)
+            foreach (GameEntity entity in _removeList)
             {
                 entity.ParentWorld = null;
-                Entities.Remove(entity);
+                _entities.Remove(entity);
             }
 
-            AddList.RemoveRange(0, AddList.Count);
-            RemoveList.RemoveRange(0, RemoveList.Count);
+            _addList.RemoveRange(0, _addList.Count);
+            _removeList.RemoveRange(0, _removeList.Count);
         }
 
         #endregion
