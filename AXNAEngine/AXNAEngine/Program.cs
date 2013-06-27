@@ -1,4 +1,5 @@
 using System;
+using AXNAEngine.com.axna;
 
 namespace AXNAEngine
 {
@@ -10,7 +11,7 @@ namespace AXNAEngine
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (Engine game = new Engine(800, 600))
             {
                 game.Run();
             }
