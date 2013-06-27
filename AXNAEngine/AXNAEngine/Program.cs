@@ -1,5 +1,6 @@
 using System;
 using AXNAEngine.com.axna;
+using AXNAEngine.com.testgame;
 
 namespace AXNAEngine
 {
@@ -11,10 +12,12 @@ namespace AXNAEngine
         /// </summary>
         static void Main(string[] args)
         {
-            using (Engine game = new Engine(800, 600))
-            {
-                game.Run();
-            }
+            Engine game = new Engine(800, 600);
+
+            AXNA.WorldManager.AddWorld(new TestWorld());
+            AXNA.WorldManager.ActivateWorldByName("TestWorld");
+
+            game.Run();
         }
     }
 #endif

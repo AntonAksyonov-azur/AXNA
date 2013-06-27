@@ -117,7 +117,7 @@
     <Compile Include="com\axna\graphics\background\ParallaxTexture.cs" />
     <Compile Include="com\axna\GameEntity.cs" />
     <Compile Include="com\axna\graphics\Anim.cs" />
-    <Compile Include="com\axna\graphics\Graphics.cs" />
+    <Compile Include="com\axna\graphics\Graphic.cs" />
     <Compile Include="com\axna\graphics\Image.cs" />
     <Compile Include="com\axna\graphics\Spritemap.cs" />
     <Compile Include="com\axna\graphics\Stamp.cs" />
@@ -128,6 +128,7 @@
     <Compile Include="com\axna\World.cs" />
     <Compile Include="com\axna\managers\WorldManager.cs" />
     <Compile Include="com\c3\Primitives2D.cs" />
+    <Compile Include="com\testgame\TestWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="com\axna\Engine.cs" />
