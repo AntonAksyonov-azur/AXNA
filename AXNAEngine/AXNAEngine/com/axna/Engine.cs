@@ -11,6 +11,8 @@ namespace AXNAEngine.com.axna
         public Engine(int width, int height, bool isMouseVisible = true)
         {
             Graphics = new GraphicsDeviceManager(this);
+            AXNA.WorldManager = new WorldManager();
+
             Content.RootDirectory = "Content";
 
             Graphics.PreferredBackBufferWidth = width;
@@ -32,7 +34,7 @@ namespace AXNAEngine.com.axna
             AXNA.Game = this;
             AXNA.Content = Content;
             AXNA.GraphicsDevice = Graphics.GraphicsDevice;
-            AXNA.WorldManager = new WorldManager();
+           
             AXNA.SpriteBatch = new SpriteBatch(Graphics.GraphicsDevice);
         }
 
@@ -52,6 +54,7 @@ namespace AXNAEngine.com.axna
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            AXNA.WorldManager.Draw(gameTime);
 
             base.Draw(gameTime);
         }
