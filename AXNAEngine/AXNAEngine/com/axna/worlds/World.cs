@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using AXNAEngine.com.axna.graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace AXNAEngine.com.axna
+namespace AXNAEngine.com.axna.worlds
 {
     public class World
     {
-        private readonly List<GameEntity> _addList = new List<GameEntity>();
-        private readonly List<GameEntity> _removeList = new List<GameEntity>();
-        private readonly List<GameEntity> _entities = new List<GameEntity>();
+        protected readonly List<GameEntity> AddList = new List<GameEntity>();
+        protected readonly List<GameEntity> RemoveList = new List<GameEntity>();
+        protected readonly List<GameEntity> Entities = new List<GameEntity>();
+        protected Color ClearColor = Color.CornflowerBlue;
 
         public World(String name)
         {
@@ -22,12 +23,12 @@ namespace AXNAEngine.com.axna
 
         public void AddEntity(GameEntity gameEntity)
         {
-            _addList.Add(gameEntity);
+            AddList.Add(gameEntity);
         }
 
         public void RemoveEntity(GameEntity gameEntity)
         {
-            _removeList.Add(gameEntity);
+            RemoveList.Add(gameEntity);
         }
 
         #endregion
@@ -42,7 +43,7 @@ namespace AXNAEngine.com.axna
         {
             UpdateLists();
 
-            foreach (GameEntity entity in _entities)
+            foreach (GameEntity entity in Entities)
             {
                 entity.Update(gameTime);
             }
@@ -50,9 +51,10 @@ namespace AXNAEngine.com.axna
 
         public virtual void OnDraw(GameTime gameTime)
         {
+            AXNA.GraphicsDevice.Clear(ClearColor);
             AXNA.SpriteBatch.Begin();
 
-            foreach (GameEntity entity in _entities)
+            foreach (GameEntity entity in Entities)
             {
                 entity.Draw(gameTime);
             }
@@ -62,7 +64,7 @@ namespace AXNAEngine.com.axna
 
         public virtual void OnRemove()
         {
-            _entities.RemoveRange(0, _entities.Count);
+            Entities.RemoveRange(0, Entities.Count);
         }
 
         #endregion
@@ -72,21 +74,21 @@ namespace AXNAEngine.com.axna
         private void UpdateLists()
         {
             // Добавление
-            foreach (GameEntity entity in _addList)
+            foreach (GameEntity entity in AddList)
             {
                 entity.ParentWorld = this;
-                _entities.Add(entity);
+                Entities.Add(entity);
             }
 
             // Удаление
-            foreach (GameEntity entity in _removeList)
+            foreach (GameEntity entity in RemoveList)
             {
                 entity.ParentWorld = null;
-                _entities.Remove(entity);
+                Entities.Remove(entity);
             }
 
-            _addList.RemoveRange(0, _addList.Count);
-            _removeList.RemoveRange(0, _removeList.Count);
+            AddList.RemoveRange(0, AddList.Count);
+            RemoveList.RemoveRange(0, RemoveList.Count);
         }
 
         #endregion

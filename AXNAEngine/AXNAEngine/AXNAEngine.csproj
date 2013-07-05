@@ -125,7 +125,8 @@
     <Compile Include="com\axna\managers\InputManager.cs" />
     <Compile Include="com\axna\ui\ClickableLabel.cs" />
     <Compile Include="com\axna\ui\TextLabel.cs" />
-    <Compile Include="com\axna\World.cs" />
+    <Compile Include="com\axna\worlds\RenderTargetWorld.cs" />
+    <Compile Include="com\axna\worlds\World.cs" />
     <Compile Include="com\axna\managers\WorldManager.cs" />
     <Compile Include="com\c3\Primitives2D.cs" />
     <Compile Include="com\testgame\TestWorld.cs" />

@@ -53,7 +53,6 @@ namespace AXNAEngine.com.axna
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
             AXNA.WorldManager.Draw(gameTime);
 
             base.Draw(gameTime);

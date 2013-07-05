@@ -5,12 +5,14 @@ using System.Text;
 using AXNAEngine.com.axna;
 using AXNAEngine.com.axna.graphics;
 using AXNAEngine.com.axna.managers;
+using AXNAEngine.com.axna.worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace AXNAEngine.com.testgame
 {
-    public class TestWorld : World
+    public class TestWorld : RenderTargetWorld
     {
         private GameEntity _entity;
 
@@ -31,12 +33,46 @@ namespace AXNAEngine.com.testgame
             //_entity.SetHitbox(64, 64, 32, 32);
 
             AddEntity(_entity);
+
+            base.OnInitialize();
         }
 
         public override void OnUpdate(GameTime gameTime)
         {
             AXNA.Game.Window.Title = 
-                String.Format("Mouse X:{0}, Y:{1}", InputManager.GetMouseX(), InputManager.GetMouseY());
+                String.Format("Mouse X:{0}, Y:{1}; Scale:{2}", 
+                InputManager.GetMouseX(), InputManager.GetMouseY(), RenderScale);
+
+            if (InputManager.IsKeyDown(Keys.Up))
+            {
+                RenderScale += 0.01f;
+            }
+
+            if (InputManager.IsKeyDown(Keys.Down))
+            {
+                RenderScale -= 0.01f;
+            }
+            //
+
+            if (InputManager.IsKeyDown(Keys.W))
+            {
+                RenderCenterOffset.Y += 1f;
+            }
+
+            if (InputManager.IsKeyDown(Keys.S))
+            {
+                RenderCenterOffset.Y -= 1f;
+            }
+
+            if (InputManager.IsKeyDown(Keys.A))
+            {
+                RenderCenterOffset.X += 1f;
+            }
+
+            if (InputManager.IsKeyDown(Keys.D))
+            {
+                RenderCenterOffset.X -= 1f;
+            }
 
             base.OnUpdate(gameTime);
         }
