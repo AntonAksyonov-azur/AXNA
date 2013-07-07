@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using AXNAEngine.com.axna;
 using AXNAEngine.com.axna.graphics;
 using AXNAEngine.com.axna.managers;
@@ -16,7 +13,7 @@ namespace AXNAEngine.com.testgame
     {
         private GameEntity _entity;
 
-        public TestWorld() : base("TestWorld")
+        public TestWorld() : base("TestWorld", new Point(1930, 2219), new Rectangle(0, 0, 800, 600))
         {
         }
 
@@ -24,12 +21,12 @@ namespace AXNAEngine.com.testgame
         {
             AXNA.DebugMode = true;
 
-            Texture2D texture = AXNA.Content.Load<Texture2D>("Textures/TestTexture");
+            Texture2D texture = AXNA.Content.Load<Texture2D>("Textures/morr");
             Image image = new Image(texture);
             image.CenterOrigin();
-            image.SetRotationAngleByDegrees(45);
+            //image.SetRotationAngleByDegrees(45);
             //image.SetRelative(t);
-            _entity = new GameEntity(image, 100, 100);
+            _entity = new GameEntity(image, 0, 0);
             //_entity.SetHitbox(64, 64, 32, 32);
 
             AddEntity(_entity);
@@ -39,9 +36,9 @@ namespace AXNAEngine.com.testgame
 
         public override void OnUpdate(GameTime gameTime)
         {
-            AXNA.Game.Window.Title = 
-                String.Format("Mouse X:{0}, Y:{1}; Scale:{2}", 
-                InputManager.GetMouseX(), InputManager.GetMouseY(), RenderScale);
+            AXNA.Game.Window.Title =
+                String.Format("Mouse X:{0}, Y:{1}; Scale:{2}",
+                              InputManager.GetMouseX(), InputManager.GetMouseY(), RenderScale);
 
             if (InputManager.IsKeyDown(Keys.Up))
             {
@@ -52,27 +49,28 @@ namespace AXNAEngine.com.testgame
             {
                 RenderScale -= 0.01f;
             }
-            //
 
+            //
             if (InputManager.IsKeyDown(Keys.W))
             {
-                RenderCenterOffset.Y += 1f;
+                CameraRectangle.Y -= 10;
             }
 
             if (InputManager.IsKeyDown(Keys.S))
             {
-                RenderCenterOffset.Y -= 1f;
+                CameraRectangle.Y += 10;
             }
 
             if (InputManager.IsKeyDown(Keys.A))
             {
-                RenderCenterOffset.X += 1f;
+                CameraRectangle.X -= 10;
             }
 
             if (InputManager.IsKeyDown(Keys.D))
             {
-                RenderCenterOffset.X -= 1f;
+                CameraRectangle.X += 10;
             }
+
 
             base.OnUpdate(gameTime);
         }

@@ -7,19 +7,23 @@ namespace AXNAEngine.com.axna.worlds
     public class RenderTargetWorld : World
     {
         protected RenderTarget2D RenderTarget;
-        protected float RenderScale = 1.0f;
-        protected Vector2 RenderCenterOffset = Vector2.Zero;
+        protected Point RenderTargetSize;
+        
+        protected float RenderScale = 1.0f;        
+        protected Rectangle CameraRectangle;
 
-        public RenderTargetWorld(String name) : base(name)
+        public RenderTargetWorld(String name, Point renderTargetSize, Rectangle cameraRectangle) : base(name)
         {
+            CameraRectangle = cameraRectangle;
+            RenderTargetSize = renderTargetSize;
         }
 
         public override void OnInitialize()
         {
             RenderTarget = new RenderTarget2D(
                 AXNA.GraphicsDevice,
-                AXNA.GraphicsDevice.PresentationParameters.BackBufferWidth,
-                AXNA.GraphicsDevice.PresentationParameters.BackBufferHeight);
+                RenderTargetSize.X,
+                RenderTargetSize.Y);
 
             base.OnInitialize();
         }
@@ -44,16 +48,19 @@ namespace AXNAEngine.com.axna.worlds
             AXNA.SpriteBatch.Begin();
             AXNA.SpriteBatch.Draw(
                 RenderTarget,
+                    new Vector2(
+                        AXNA.GraphicsDevice.PresentationParameters.BackBufferWidth / 2,
+                        AXNA.GraphicsDevice.PresentationParameters.BackBufferHeight / 2),
+                CameraRectangle, 
+                Color.White, 
+                0f,
                 new Vector2(
-                    AXNA.GraphicsDevice.PresentationParameters.BackBufferWidth / 2 + RenderCenterOffset.X,
-                    AXNA.GraphicsDevice.PresentationParameters.BackBufferHeight / 2 + RenderCenterOffset.Y),
-                null, Color.White, 0f,
-                new Vector2(
-                    RenderTarget.Width / 2,
-                    RenderTarget.Height / 2),
+                        CameraRectangle.Width / 2,
+                        CameraRectangle.Height / 2),
                 RenderScale,
                 SpriteEffects.None,
                 0f);
+            
             AXNA.SpriteBatch.End();
         }
     }
