@@ -5,21 +5,27 @@ namespace AXNAEngine.com.axna.graphics
 {
     public class Anim
     {
-        public Point FirstFramePosition;
+        public Point FirstFramePosition { get; private set; }
 
-        public float FrameRate;
-        public int FramesCount;
+        public int FramesCount { get; private set; }
+        public float FramesPerSecond { get; private set; }
+        public float TargetTime { get; private set; }
 
-        public bool Loop;
-        public String Name;
+        public bool Loop { get; private set; }
+        public String Name { get; private set; }
 
-        public Anim(string name, Point firstFramePosition, int framesCount, float frameRate, bool loop)
+        public Anim(String name, Point firstFramePosition, int framesCount, float framesPerSecond, bool loop)
         {
             Name = name;
-            FirstFramePosition = firstFramePosition;
+
             FramesCount = framesCount;
-            FrameRate = frameRate;
+            FirstFramePosition = firstFramePosition;
+            FramesPerSecond = framesPerSecond;
+            
+            TargetTime = 1.0f / FramesPerSecond;
+            
             Loop = loop;
         }
+
     }
 }

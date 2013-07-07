@@ -10,7 +10,7 @@ namespace AXNAEngine.com.axna.graphics
         protected float ElapsedTime = 0.0f;
         protected Dictionary<String, Anim> AnimationList = new Dictionary<string, Anim>();
         protected Anim PlayedAnim;
-        protected int CurrentFrame = 0;
+        public int CurrentFrame { get; private set; }
 
         public Spritemap(Texture2D source, int frameWidth, int frameHeight)
             : base(source)
@@ -20,10 +20,13 @@ namespace AXNAEngine.com.axna.graphics
         }
 
         #region Source control
-        public void AddAnimation(String name, Point firstFramePosition, int framesCount, float frameRate = 1,
-                                 bool loop = false)
+
+        public void AddAnimation(String name, Point firstFramePosition,
+                                 int framesCount, int framesPerSecond = 30, bool loop = false)
         {
-            AnimationList.Add(name, new Anim(name, firstFramePosition, framesCount, frameRate, loop));
+            AnimationList.Add(
+                name,
+                new Anim(name, firstFramePosition, framesCount, framesPerSecond, loop));
         }
 
         public void RemoveAnimation(String name)
@@ -38,10 +41,11 @@ namespace AXNAEngine.com.axna.graphics
                 throw new Exception(String.Format("Анимация {0} не зарегистрирована (операция удаления)!", name));
             }
         }
+
         #endregion
 
         /// <summary>
-        /// Начинает воспроизведение анимации
+        ///     Начинает воспроизведение анимации
         /// </summary>
         /// <param name="name">Имя анимации. Предварительно должно быть зарегистрировано в экземпляре Spritemap</param>
         /// <param name="forceFrame">Можно указать кадр, с которой анимация начнет воспроизводиться</param>
@@ -63,28 +67,27 @@ namespace AXNAEngine.com.axna.graphics
 
         public override void Update(GameTime gameTime)
         {
-            if (IsActive)
+            if (!IsActive) return;
+
+            ElapsedTime += AXNA.GetTimeIntervalValue(gameTime);
+
+            if (ElapsedTime >= PlayedAnim.TargetTime)
             {
-                ElapsedTime += (float)gameTime.ElapsedGameTime.Milliseconds / 1000 * PlayedAnim.FrameRate;
-
-                if (ElapsedTime >= 1)
+                //CurrentFrame = (CurrentFrame + 1) % PlayedAnim.framesPerSecond;
+                CurrentFrame += 1;
+                if (CurrentFrame == PlayedAnim.FramesCount)
                 {
-                    //CurrentFrame = (CurrentFrame + 1) % PlayedAnim.FramesCount;
-                    CurrentFrame += 1;
-                    if (CurrentFrame == PlayedAnim.FramesCount)
+                    if (PlayedAnim.Loop)
                     {
-                        if (PlayedAnim.Loop)
-                        {
-                            CurrentFrame = 0;
-                        }
-                        else
-                        {
-                            IsActive = false;
-                        }
+                        CurrentFrame = 0;
                     }
-
-                    ElapsedTime = 0.0f;
+                    else
+                    {
+                        IsActive = false;
+                    }
                 }
+
+                ElapsedTime = 0.0f;
             }
         }
 
@@ -92,10 +95,24 @@ namespace AXNAEngine.com.axna.graphics
         {
             if (!IsVisible) return;
 
-            Rectangle positionRectangle = IsRelative ?
-                                              new Rectangle((int)(position.X + X + Origin.X), (int)(position.Y + Y + Origin.Y), _frameWidth, _frameHeight) :
-                                              new Rectangle(X, Y, _frameWidth, _frameHeight);
-            spriteBatch.Draw(Texture, positionRectangle, GetCurrentFrameRectangle(), GetColor(), Angle, Origin, SpriteEffect, 0);
+            Rectangle positionRectangle =
+                IsRelative
+                    ? new Rectangle(
+                          (int) (position.X + X + Origin.X),
+                          (int) (position.Y + Y + Origin.Y),
+                          _frameWidth, _frameHeight)
+                    : new Rectangle(X, Y, _frameWidth, _frameHeight);
+
+            spriteBatch.Draw(
+                Texture,
+                new Vector2(positionRectangle.X, positionRectangle.Y),
+                GetCurrentFrameRectangle(),
+                GetColor(),
+                Angle,
+                Origin,
+                Scale,
+                SpriteEffect,
+                0);
         }
 
         public Anim GetCurrentAnimation()
@@ -106,16 +123,11 @@ namespace AXNAEngine.com.axna.graphics
         private Rectangle GetCurrentFrameRectangle()
         {
             var rectangle = new Rectangle(
-                    PlayedAnim.FirstFramePosition.X + (_frameWidth * CurrentFrame),
-                    PlayedAnim.FirstFramePosition.Y,
-                    _frameWidth, _frameHeight);
+                PlayedAnim.FirstFramePosition.X + (_frameWidth * CurrentFrame),
+                PlayedAnim.FirstFramePosition.Y,
+                _frameWidth, _frameHeight);
 
             return rectangle;
-        }
-
-        public override void SetScaleByValue(float scaleValue)
-        {
-            throw new Exception("Пока что нельзя динамически изменять размеры Spritemap");
         }
 
         public override void CenterOrigin()
@@ -127,7 +139,7 @@ namespace AXNAEngine.com.axna.graphics
         {
             if (PlayedAnim != null)
             {
-                return CurrentFrame == PlayedAnim.FramesCount - 1;
+                return CurrentFrame == PlayedAnim.FramesPerSecond - 1;
             }
 
             return false;
@@ -136,5 +148,6 @@ namespace AXNAEngine.com.axna.graphics
         //
         private readonly int _frameWidth;
         private readonly int _frameHeight;
+        private float targetTime;
     }
 }
