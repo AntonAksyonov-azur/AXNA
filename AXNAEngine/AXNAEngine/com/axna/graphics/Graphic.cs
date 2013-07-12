@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace AXNAEngine.com.axna.graphics
@@ -13,12 +14,12 @@ namespace AXNAEngine.com.axna.graphics
 
         public virtual void Update(GameTime gameTime)
         {
-
+            throw new Exception("Usage of base method");
         }
 
         public virtual void Render(SpriteBatch spriteBatch, Vector2 position)
         {
-
+            throw new Exception("Usage of base method");
         }
 
         /// <summary>
