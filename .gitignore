@@ -1,8 +1,13 @@
-/AXNAEngine/AXNAEngineContent/obj
-/AXNAEngine/AXNAEngine/obj
-/AXNAEngine/AXNAEngine/bin
+/AXNAEngine/obj
+/AXNAEngine/bin
+/AXNAEngineContent/AXNAEngineContent/obj
+/AXNAEngineContent/AXNAEngineContent/bin
+/AXNAEngineContent/AXNAEngineContentContent/obj
+/AXNAEngineContent/AXNAEngineContentContent/bin
 
 /AXNAEngine.sln
 /AXNAEngine.suo
 
 /AXNAEngine/AXNAEngine/*.cachefile
+
+

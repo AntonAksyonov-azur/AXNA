@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E92221B6-72FE-4011-B812-79305D6F83F8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AXNAEngine</RootNamespace>
+    <AssemblyName>AXNAEngine</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\WindowsGL\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\WindowsGL\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="com\axna\AXNA.cs" />
+    <Compile Include="com\axna\configuration\ParticleEngineConfiguration.cs" />
+    <Compile Include="com\axna\Engine.cs" />
+    <Compile Include="com\axna\EngineEntity.cs" />
+    <Compile Include="com\axna\GameEntity.cs" />
+    <Compile Include="com\axna\graphics\Anim.cs" />
+    <Compile Include="com\axna\graphics\background\Background.cs" />
+    <Compile Include="com\axna\graphics\background\ParallaxBackground.cs" />
+    <Compile Include="com\axna\graphics\background\ParallaxTexture.cs" />
+    <Compile Include="com\axna\graphics\Graphic.cs" />
+    <Compile Include="com\axna\graphics\Image.cs" />
+    <Compile Include="com\axna\graphics\particles\Particle.cs" />
+    <Compile Include="com\axna\graphics\particles\ParticleEngine.cs" />
+    <Compile Include="com\axna\graphics\Spritemap.cs" />
+    <Compile Include="com\axna\graphics\Stamp.cs" />
+    <Compile Include="com\axna\graphics\TextString.cs" />
+    <Compile Include="com\axna\managers\InputManager.cs" />
+    <Compile Include="com\axna\managers\WorldManager.cs" />
+    <Compile Include="com\axna\net\extension\RandomExtension.cs" />
+    <Compile Include="com\axna\ui\ClickableLabel.cs" />
+    <Compile Include="com\axna\ui\TextLabel.cs" />
+    <Compile Include="com\axna\utility\ConfigurationLoader.cs" />
+    <Compile Include="com\axna\worlds\RenderTargetWorld.cs" />
+    <Compile Include="com\axna\worlds\World.cs" />
+    <Compile Include="com\c3\Primitives2D.cs" />
+    <Compile Include="com\testgame\ParticlesWorld.cs" />
+    <Compile Include="com\testgame\TestWorld.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK">
+      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network">
+      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\Tao.Sdl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\WindowsGL\SDL.dll">
+      <Link>SDL.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="com\axna\constants\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Textures\attack_up0.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Textures\Particles\circle.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Textures\Particles\cross.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Textures\morr.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Textures\PowerUp.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Textures\TestTexture.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
