@@ -14,6 +14,14 @@ namespace AXNAEngine.com.axna.configuration
         public Vector2 LocalVelocity;
         public Vector2 RandomVelocity;
 
+        public Vector2 ScaleSpeed;
+
+        public float AngleSpeed;
+        public float RandomMinAngle;
+        public float RandomMaxAngle;
+
+        public float FadeSpeed;
+
         public void InitDefault()
         {
             IsOneShot = false;
@@ -24,6 +32,14 @@ namespace AXNAEngine.com.axna.configuration
             MaxEnergy = 3000;
             LocalVelocity = Vector2.Zero;
             RandomVelocity = Vector2.Zero;
+
+            ScaleSpeed =  Vector2.Zero;
+
+            AngleSpeed = 0;
+            RandomMinAngle = 0;
+            RandomMaxAngle = 0;
+
+            FadeSpeed = 0;
         }
     }
 }

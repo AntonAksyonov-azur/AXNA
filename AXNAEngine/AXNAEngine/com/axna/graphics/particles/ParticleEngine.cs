@@ -9,9 +9,11 @@ namespace AXNAEngine.com.axna.graphics.particles
 {
     public class ParticleEngine : Graphic
     {
+        #region Emission
+
         /// <summary>
-        /// Если true, все частицы будут создаваться одновременно, с интервалом EmitInterval
-        /// Если false, частицы будут создаваться равномерно в течении EmitInterval
+        ///     Если true, все частицы будут создаваться одновременно, с интервалом EmitInterval
+        ///     Если false, частицы будут создаваться равномерно в течении EmitInterval
         /// </summary>
         public bool IsOneShot = false;
 
@@ -30,6 +32,10 @@ namespace AXNAEngine.com.axna.graphics.particles
         /// </summary>
         public int MaxEmission = 30;
 
+        #endregion
+
+        #region Lifetime
+
         /// <summary>
         ///     Минимальный срок жизни частицы
         /// </summary>
@@ -40,6 +46,10 @@ namespace AXNAEngine.com.axna.graphics.particles
         /// </summary>
         public int MaxEnergy = 3000;
 
+        #endregion
+
+        #region Velocity
+
         /// <summary>
         ///     Скорость частицы
         /// </summary>
@@ -49,6 +59,47 @@ namespace AXNAEngine.com.axna.graphics.particles
         ///     Случайное значение между -value и value, добавляемое к скорости
         /// </summary>
         public Vector2 RandomVelocity = Vector2.Zero;
+
+        #endregion
+
+        #region Scale
+
+        /// <summary>
+        ///     Скорость изменения размера.
+        ///     Положительные числа увеличивают размер, отрицательные уменьшают
+        /// </summary>
+        public Vector2 ScaleSpeed = Vector2.Zero;
+
+        #endregion
+
+        #region Angle
+
+        /// <summary>
+        ///     Скорость поворота частицы
+        /// </summary>
+        public float AngleSpeed = 0;
+
+
+        /// <summary>
+        ///     Начальное значение угла (минимальнное значение)
+        /// </summary>
+        public float RandomMinAngle = 0;
+
+        /// <summary>
+        ///     Начальное значение угла (максимальное значение)
+        /// </summary>
+        public float RandomMaxAngle = 0;
+
+        #endregion
+
+        #region Transparency
+
+        /// <summary>
+        ///     Скорость изменения прозрачности
+        /// </summary>
+        public float FadeSpeed = 0;
+
+        #endregion
 
         // Private
         private readonly Random _random;
@@ -87,16 +138,26 @@ namespace AXNAEngine.com.axna.graphics.particles
             EmitInterval = configuration.EmitInterval;
             MinEmission = configuration.MinEmission;
             MaxEmission = configuration.MaxEmission;
+
             MinEnergy = configuration.MinEnergy;
             MaxEnergy = configuration.MaxEnergy;
+
             LocalVelocity = configuration.LocalVelocity;
             RandomVelocity = configuration.RandomVelocity;
+
+            ScaleSpeed = configuration.ScaleSpeed;
+
+            AngleSpeed = configuration.AngleSpeed;
+            RandomMinAngle = configuration.RandomMinAngle;
+            RandomMaxAngle = configuration.RandomMaxAngle;
+
+            FadeSpeed = configuration.FadeSpeed;
 
             IsOneShot = configuration.IsOneShot;
             if (!IsOneShot)
             {
                 SetupContinuousEmit();
-            }   
+            }
         }
 
         /// <summary>
@@ -113,13 +174,12 @@ namespace AXNAEngine.com.axna.graphics.particles
 
             int lifetime = _random.Next(MinEnergy, MaxEnergy);
 
+            float startAngle = _random.NextDoubleInRange(RandomMinAngle, RandomMaxAngle);
+
             Particle particle =
                 new Particle(
-                    _texture,
-                    new Vector2(X, Y),
-                    finalVelocity,
-                    lifetime,
-                    Color.White);
+                    _texture, new Vector2(X, Y), finalVelocity, lifetime, Color.White,
+                    startAngle, AngleSpeed, ScaleSpeed, FadeSpeed);
 
             return particle;
         }
@@ -145,8 +205,12 @@ namespace AXNAEngine.com.axna.graphics.particles
                 _elapsedTimeForNonOneShot += gameTime.ElapsedGameTime.Milliseconds;
                 if (_elapsedTimeForNonOneShot >= _emitIntervalForNonOneShot)
                 {
-                    _particles.Add(GenerateNewParticle());
-                    _elapsedTimeForNonOneShot = 0;
+                    for (int i = 0; i < _elapsedTimeForNonOneShot / _emitIntervalForNonOneShot; i++)
+                    {
+                        _particles.Add(GenerateNewParticle());
+                    }
+
+                    _elapsedTimeForNonOneShot = _elapsedTimeForNonOneShot % _emitIntervalForNonOneShot;
                 }
 
                 if (_elapsedTime >= EmitInterval)
@@ -155,21 +219,20 @@ namespace AXNAEngine.com.axna.graphics.particles
                 }
             }
 
-            
 
             // Удаляем частицы с истекшим сроком жизни
-            for (int particle = 0; particle < _particles.Count; particle++)
+            for (int i = 0; i < _particles.Count; i++)
             {
-                _particles[particle].UpdateParticle(gameTime);
-                if (_particles[particle].LifeTime <= 0)
+                _particles[i].UpdateParticle(gameTime);
+                if (_particles[i].LifeTime <= 0 || _particles[i].Alpha <= 0)
                 {
-                    _particles.RemoveAt(particle);
-                    particle--;
+                    _particles.RemoveAt(i);
+                    i--;
                 }
             }
         }
 
-        private void SetupContinuousEmit()
+        public void SetupContinuousEmit()
         {
             int count = _random.Next(MinEmission, MaxEmission);
             _emitIntervalForNonOneShot = EmitInterval / count;
