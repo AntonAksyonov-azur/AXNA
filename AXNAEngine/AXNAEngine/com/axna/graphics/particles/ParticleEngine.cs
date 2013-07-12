@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AXNAEngine.com.axna.configuration;
 using AXNAEngine.com.axna.net.extension;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,6 +9,12 @@ namespace AXNAEngine.com.axna.graphics.particles
 {
     public class ParticleEngine : Graphic
     {
+        /// <summary>
+        /// Если true, все частицы будут создаваться одновременно, с интервалом EmitInterval
+        /// Если false, частицы будут создаваться равномерно в течении EmitInterval
+        /// </summary>
+        public bool IsOneShot = false;
+
         /// <summary>
         ///     Интервал (в ms) создания новых частиц
         /// </summary>
@@ -50,16 +57,25 @@ namespace AXNAEngine.com.axna.graphics.particles
 
         //
         private int _elapsedTime = 0;
+        private int _elapsedTimeForNonOneShot = 0;
+        private int _emitIntervalForNonOneShot = 0;
 
-
-        public ParticleEngine(Texture2D texture, Point location)
+        public ParticleEngine(Texture2D texture, Point location, bool isOneShot)
         {
             X = location.X;
             Y = location.Y;
             _texture = texture;
             _particles = new List<Particle>();
             _random = new Random();
+
+            IsOneShot = isOneShot;
+            if (!IsOneShot)
+            {
+                SetupContinuousEmit();
+            }
         }
+
+        
 
         /// <summary>
         ///     Создание новой частицы
@@ -89,14 +105,35 @@ namespace AXNAEngine.com.axna.graphics.particles
         public override void Update(GameTime gameTime)
         {
             _elapsedTime += gameTime.ElapsedGameTime.Milliseconds;
-            if (_elapsedTime >= EmitInterval)
+            if (IsOneShot)
             {
-                int count = _random.Next(MinEmission, MaxEmission);
-                for (int i = 0; i < count; i++)
+                if (_elapsedTime >= EmitInterval)
                 {
-                    _particles.Add(GenerateNewParticle());
+                    int count = _random.Next(MinEmission, MaxEmission);
+                    for (int i = 0; i < count; i++)
+                    {
+                        _particles.Add(GenerateNewParticle());
+                    }
+
+                    _elapsedTime = 0;
                 }
             }
+            else
+            {
+                _elapsedTimeForNonOneShot += gameTime.ElapsedGameTime.Milliseconds;
+                if (_elapsedTimeForNonOneShot >= _emitIntervalForNonOneShot)
+                {
+                    _particles.Add(GenerateNewParticle());
+                    _elapsedTimeForNonOneShot = 0;
+                }
+
+                if (_elapsedTime >= EmitInterval)
+                {
+                    SetupContinuousEmit();
+                }
+            }
+
+            
 
             // Удаляем частицы с истекшим сроком жизни
             for (int particle = 0; particle < _particles.Count; particle++)
@@ -110,12 +147,19 @@ namespace AXNAEngine.com.axna.graphics.particles
             }
         }
 
-        public void Render(SpriteBatch spriteBatch)
+        private void SetupContinuousEmit()
+        {
+            int count = _random.Next(MinEmission, MaxEmission);
+            _emitIntervalForNonOneShot = EmitInterval / count;
+            _elapsedTime = 0;
+        }
+
+        public override void Render(SpriteBatch spriteBatch, Vector2 position)
         {
             //Drawing all the particles of the system
             foreach (Particle t in _particles)
             {
-                t.DrawParticle(spriteBatch);
+                t.DrawParticle(spriteBatch, position);
             }
         }
     }
