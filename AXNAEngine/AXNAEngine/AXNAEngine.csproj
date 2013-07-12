@@ -96,6 +96,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -111,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="com\axna\AXNA.cs" />
+    <Compile Include="com\axna\configuration\ParticleEngineConfiguration.cs" />
     <Compile Include="com\axna\EngineEntity.cs" />
     <Compile Include="com\axna\graphics\background\Background.cs" />
     <Compile Include="com\axna\graphics\background\ParallaxBackground.cs" />
@@ -128,7 +130,8 @@
     <Compile Include="com\axna\net\extension\RandomExtension.cs" />
     <Compile Include="com\axna\ui\ClickableLabel.cs" />
     <Compile Include="com\axna\ui\TextLabel.cs" />
-    <Compile Include="com\axna\worlds\ParticlesWorld.cs" />
+    <Compile Include="com\axna\utility\ConfigurationLoader.cs" />
+    <Compile Include="com\testgame\ParticlesWorld.cs" />
     <Compile Include="com\axna\worlds\RenderTargetWorld.cs" />
     <Compile Include="com\axna\worlds\World.cs" />
     <Compile Include="com\axna\managers\WorldManager.cs" />

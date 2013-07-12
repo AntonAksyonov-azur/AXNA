@@ -1,5 +1,6 @@
 using System;
 using AXNAEngine.com.axna;
+using AXNAEngine.com.axna.worlds;
 using AXNAEngine.com.testgame;
 
 namespace AXNAEngine
@@ -14,8 +15,10 @@ namespace AXNAEngine
         {
             Engine game = new Engine(800, 600);
 
-            AXNA.WorldManager.AddWorld(new TestWorld());
-            AXNA.WorldManager.ActivateWorldByName("TestWorld");
+            //AXNA.WorldManager.AddWorld(new TestWorld());
+            AXNA.WorldManager.AddWorld(new ParticlesWorld());
+            //AXNA.WorldManager.ActivateWorldByName("TestWorld");
+            AXNA.WorldManager.ActivateWorldByName("Particles");
 
             game.Run();
         }
