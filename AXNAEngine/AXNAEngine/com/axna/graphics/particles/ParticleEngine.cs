@@ -75,7 +75,29 @@ namespace AXNAEngine.com.axna.graphics.particles
             }
         }
 
-        
+        public ParticleEngine(ParticleEngineConfiguration configuration, Texture2D texture, Point location)
+        {
+            X = location.X;
+            Y = location.Y;
+            _texture = texture;
+            _particles = new List<Particle>();
+            _random = new Random();
+
+            IsOneShot = configuration.IsOneShot;
+            EmitInterval = configuration.EmitInterval;
+            MinEmission = configuration.MinEmission;
+            MaxEmission = configuration.MaxEmission;
+            MinEnergy = configuration.MinEnergy;
+            MaxEnergy = configuration.MaxEnergy;
+            LocalVelocity = configuration.LocalVelocity;
+            RandomVelocity = configuration.RandomVelocity;
+
+            IsOneShot = configuration.IsOneShot;
+            if (!IsOneShot)
+            {
+                SetupContinuousEmit();
+            }   
+        }
 
         /// <summary>
         ///     Создание новой частицы
