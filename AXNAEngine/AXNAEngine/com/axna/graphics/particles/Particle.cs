@@ -53,9 +53,9 @@ namespace AXNAEngine.com.axna.graphics.particles
             //Color = new Color(1f, (float)_random.NextDouble(), 0f);
         }
 
-        public void DrawParticle(SpriteBatch spriteBatch)
+        public void DrawParticle(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(Texture, Position, Color.White);
+            spriteBatch.Draw(Texture, position + Position, Color.White);
         }
     }
 }
