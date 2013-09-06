@@ -40,6 +40,7 @@
     <Compile Include="com\axna\Engine.cs" />
     <Compile Include="com\axna\entity\EngineEntity.cs" />
     <Compile Include="com\axna\entity\GameEntity.cs" />
+    <Compile Include="com\axna\entity\InteractiveEntity.cs" />
     <Compile Include="com\axna\graphics\Anim.cs" />
     <Compile Include="com\axna\graphics\background\Background.cs" />
     <Compile Include="com\axna\graphics\background\ParallaxBackground.cs" />
