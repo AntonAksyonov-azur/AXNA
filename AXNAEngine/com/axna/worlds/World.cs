@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AXNAEngine.com.axna.entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

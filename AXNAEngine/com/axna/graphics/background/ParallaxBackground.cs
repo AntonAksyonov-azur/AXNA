@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AXNAEngine.com.axna.entity;
 using Microsoft.Xna.Framework;
 
 namespace AXNAEngine.com.axna.graphics.background

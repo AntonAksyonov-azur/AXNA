@@ -1,5 +1,6 @@
 ﻿using System;
 using AXNAEngine.com.axna;
+using AXNAEngine.com.axna.entity;
 using AXNAEngine.com.axna.graphics;
 using AXNAEngine.com.axna.managers;
 using AXNAEngine.com.axna.worlds;
@@ -15,7 +16,8 @@ namespace AXNAEngine.com.testgame
 
         public Spritemap spritemap;
 
-        public TestWorld() : base("TestWorld", new Point(1930, 2219), new Rectangle(0, 0, 800, 600))
+        public TestWorld()
+            : base("TestWorld", new Point(4096, 4096), new Rectangle(0, 0, 800, 600))
         {
         }
 
@@ -23,7 +25,10 @@ namespace AXNAEngine.com.testgame
         {
             AXNA.DebugMode = true;
             
-            Texture2D texture = AXNA.Content.Load<Texture2D>("Textures/attack_up0");
+            Texture2D texture = AXNA.Content.Load<Texture2D>("Textures/morr");
+            Image image = new Image(texture);
+            _entity = new GameEntity(image, 0, 0);
+            /*
             spritemap = new Spritemap(texture, 177, 165);
 
             spritemap.SetScaleByValue(1.0f);
@@ -33,7 +38,7 @@ namespace AXNAEngine.com.testgame
             spritemap.PlayAnimation("anim");
             
             _entity = new GameEntity(spritemap, 100, 100);
-
+            */
             AddEntity(_entity);
 
             base.OnInitialize();
@@ -46,10 +51,10 @@ namespace AXNAEngine.com.testgame
                 String.Format("Mouse X:{0}, Y:{1}; Scale:{2}",
                               InputManager.GetMouseX(), InputManager.GetMouseY(), RenderScale);
             */
-
+            /*
             AXNA.Game.Window.Title =
                 String.Format("Anim frame {0}", spritemap.CurrentFrame);
-
+            */
             if (InputManager.IsKeyDown(Keys.Up))
             {
                 RenderScale += 0.01f;

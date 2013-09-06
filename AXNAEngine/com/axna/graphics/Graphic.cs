@@ -14,7 +14,6 @@ namespace AXNAEngine.com.axna.graphics
 
         public virtual void Update(GameTime gameTime)
         {
-            throw new Exception("Usage of base method");
         }
 
         public virtual void Render(SpriteBatch spriteBatch, Vector2 position)

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AXNAEngine.com.axna.entity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace AXNAEngine.com.axna.graphics.background

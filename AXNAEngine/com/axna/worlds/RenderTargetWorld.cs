@@ -1,4 +1,5 @@
 ﻿using System;
+using AXNAEngine.com.axna.entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

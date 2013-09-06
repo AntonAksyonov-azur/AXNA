@@ -1,4 +1,5 @@
-﻿using AXNAEngine.com.axna.graphics;
+﻿using AXNAEngine.com.axna.entity;
+using AXNAEngine.com.axna.graphics;
 
 namespace AXNAEngine.com.axna.ui
 {

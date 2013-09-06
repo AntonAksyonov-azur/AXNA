@@ -15,10 +15,10 @@ namespace AXNAEngine
         {
             Engine game = new Engine(800, 600);
 
-            //AXNA.WorldManager.AddWorld(new TestWorld());
-            AXNA.WorldManager.AddWorld(new ParticlesWorld());
-            //AXNA.WorldManager.ActivateWorldByName("TestWorld");
-            AXNA.WorldManager.ActivateWorldByName("Particles");
+            AXNA.WorldManager.AddWorld(new TestWorld());
+            //AXNA.WorldManager.AddWorld(new ParticlesWorld());
+            AXNA.WorldManager.ActivateWorldByName("TestWorld");
+            //AXNA.WorldManager.ActivateWorldByName("Particles");
 
             game.Run();
         }

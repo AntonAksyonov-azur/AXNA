@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using StarDefenceTutorial.com.c3;
 
-namespace AXNAEngine.com.axna
+namespace AXNAEngine.com.axna.entity
 {
     public class GameEntity : EngineEntity
     {

@@ -1,4 +1,5 @@
 ﻿using AXNAEngine.com.axna;
+using AXNAEngine.com.axna.entity;
 using AXNAEngine.com.axna.graphics.particles;
 using AXNAEngine.com.axna.worlds;
 using Microsoft.Xna.Framework;
