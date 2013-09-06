@@ -53,6 +53,7 @@
     <Compile Include="com\axna\graphics\TextString.cs" />
     <Compile Include="com\axna\managers\InputManager.cs" />
     <Compile Include="com\axna\managers\WorldManager.cs" />
+    <Compile Include="com\axna\net\extension\DictionaryExtension.cs" />
     <Compile Include="com\axna\net\extension\RandomExtension.cs" />
     <Compile Include="com\axna\ui\ClickableLabel.cs" />
     <Compile Include="com\axna\ui\TextLabel.cs" />
