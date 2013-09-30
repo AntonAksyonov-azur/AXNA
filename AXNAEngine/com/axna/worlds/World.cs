@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using AXNAEngine.com.axna.entity;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace AXNAEngine.com.axna.worlds
 {
     public class World
     {
-        protected readonly List<GameEntity> AddList = new List<GameEntity>();
-        protected readonly List<GameEntity> RemoveList = new List<GameEntity>();
-        protected readonly List<GameEntity> Entities = new List<GameEntity>();
+        protected readonly List<BasicEntity> AddList = new List<BasicEntity>();
+        protected readonly List<BasicEntity> RemoveList = new List<BasicEntity>();
+        protected readonly List<BasicEntity> Entities = new List<BasicEntity>();
         protected Color ClearColor = Color.CornflowerBlue;
 
         public World(String name)
@@ -22,12 +21,12 @@ namespace AXNAEngine.com.axna.worlds
 
         #region Public Methods
 
-        public void AddEntity(GameEntity gameEntity)
+        public void AddEntity(BasicEntity gameEntity)
         {
             AddList.Add(gameEntity);
         }
 
-        public void RemoveEntity(GameEntity gameEntity)
+        public void RemoveEntity(BasicEntity gameEntity)
         {
             RemoveList.Add(gameEntity);
         }
@@ -44,9 +43,12 @@ namespace AXNAEngine.com.axna.worlds
         {
             UpdateLists();
 
-            foreach (GameEntity entity in Entities)
+            foreach (var entity in Entities)
             {
-                entity.Update(gameTime);
+                if (entity.IsActive)
+                {
+                    entity.Update(gameTime);
+                }
             }
         }
 
@@ -55,9 +57,12 @@ namespace AXNAEngine.com.axna.worlds
             AXNA.GraphicsDevice.Clear(ClearColor);
             AXNA.SpriteBatch.Begin();
 
-            foreach (GameEntity entity in Entities)
+            foreach (var entity in Entities)
             {
-                entity.Draw(gameTime);
+                if (entity.IsVisible)
+                {
+                    entity.Draw(gameTime);
+                }
             }
 
             AXNA.SpriteBatch.End();
@@ -75,14 +80,14 @@ namespace AXNAEngine.com.axna.worlds
         private void UpdateLists()
         {
             // Добавление
-            foreach (GameEntity entity in AddList)
+            foreach (var entity in AddList)
             {
                 entity.ParentWorld = this;
                 Entities.Add(entity);
             }
 
             // Удаление
-            foreach (GameEntity entity in RemoveList)
+            foreach (var entity in RemoveList)
             {
                 entity.ParentWorld = null;
                 Entities.Remove(entity);
@@ -93,5 +98,19 @@ namespace AXNAEngine.com.axna.worlds
         }
 
         #endregion
+
+        public List<T> GetEntitiesOfType<T>() where T : EngineEntity
+        {
+            List<T> result = new List<T>();
+            foreach (var gameEntity in Entities)
+            {
+                if (gameEntity is T)
+                {
+                    result.Add(gameEntity as T);
+                }
+            }
+
+            return result;
+        }
     }
 }

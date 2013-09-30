@@ -36,11 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="com\axna\AXNA.cs" />
+    <Compile Include="com\axna\entity\BasicEntity.cs" />
     <Compile Include="com\axna\configuration\ParticleEngineConfiguration.cs" />
     <Compile Include="com\axna\Engine.cs" />
     <Compile Include="com\axna\entity\EngineEntity.cs" />
     <Compile Include="com\axna\entity\GameEntity.cs" />
-    <Compile Include="com\axna\entity\InteractiveEntity.cs" />
     <Compile Include="com\axna\graphics\Anim.cs" />
     <Compile Include="com\axna\graphics\background\Background.cs" />
     <Compile Include="com\axna\graphics\background\ParallaxBackground.cs" />
@@ -57,6 +57,7 @@
     <Compile Include="com\axna\net\extension\DictionaryExtension.cs" />
     <Compile Include="com\axna\net\extension\RandomExtension.cs" />
     <Compile Include="com\axna\ui\ClickableLabel.cs" />
+    <Compile Include="com\axna\ui\SimpleButton.cs" />
     <Compile Include="com\axna\ui\TextLabel.cs" />
     <Compile Include="com\axna\utility\ConfigurationLoader.cs" />
     <Compile Include="com\axna\worlds\RenderTargetWorld.cs" />
