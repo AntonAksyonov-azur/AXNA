@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.InteropServices;
 using AXNAEngine.com.axna.managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -6,6 +8,7 @@ namespace AXNAEngine.com.axna
 {
     public class Engine : Game
     {
+
         protected readonly GraphicsDeviceManager Graphics;
 
         public Engine(int width, int height, bool isMouseVisible = true)
@@ -22,19 +25,29 @@ namespace AXNAEngine.com.axna
             IsMouseVisible = isMouseVisible;
         }
 
-// ReSharper disable RedundantOverridenMember
         protected override void Initialize()
         {
             base.Initialize();
+           
+            Type type = typeof(OpenTKGameWindow);
+            System.Reflection.FieldInfo field = type.GetField("window", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (field != null)
+            {
+                OpenTK.GameWindow window = field.GetValue(Window) as OpenTK.GameWindow;
+                if (window != null)
+                {
+                    window.X = 0;
+                    window.Y = 0;
+                }
+            }
         }
-// ReSharper restore RedundantOverridenMember
 
         protected override void LoadContent()
         {
             AXNA.Game = this;
             AXNA.Content = Content;
             AXNA.GraphicsDevice = Graphics.GraphicsDevice;
-           
+
             AXNA.SpriteBatch = new SpriteBatch(Graphics.GraphicsDevice);
         }
 
