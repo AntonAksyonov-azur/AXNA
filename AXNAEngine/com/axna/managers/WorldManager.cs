@@ -121,8 +121,8 @@ namespace AXNAEngine.com.axna.managers
                     return scr;
                 }
             }
-            // throw new Exception(String.Format("World with name {0} is not found", name));
-            return null;
+            throw new Exception(String.Format("World with name {0} is not found", name));
+            //return null;
         }
 
         #endregion
