@@ -23,12 +23,19 @@ namespace AXNAEngine.com.axna.worlds
 
         public void AddEntity(BasicEntity gameEntity)
         {
+            if (gameEntity == null)
+            {
+                throw new Exception("Attempt to add null in the world ");
+            }
             AddList.Add(gameEntity);
         }
 
         public void RemoveEntity(BasicEntity gameEntity)
         {
-            RemoveList.Add(gameEntity);
+            if (gameEntity != null)
+            {
+                RemoveList.Add(gameEntity);
+            }
         }
 
         #endregion
