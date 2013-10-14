@@ -39,6 +39,11 @@ namespace AXNAEngine.com.axna.managers
             return _mouseState.LeftButton == ButtonState.Pressed;
         }
 
+        public static bool IsMouseLeftUp()
+        {
+            return _mouseState.LeftButton == ButtonState.Released;
+        }
+
         public static bool IsMouseLeftClick()
         {
             return IsMouseLeftDown() && _mouseOldState.LeftButton == ButtonState.Released;
