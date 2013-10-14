@@ -4,17 +4,12 @@ using Microsoft.Xna.Framework;
 
 namespace AXNAEngine.com.axna.entity
 {
-    public class BasicEntity : EngineEntity
+    public class UiEntity : EngineEntity
     {
         public Rectangle Hitbox;
-        public Vector2 Position;
 
-        public bool IsActive = true;
-        public bool IsVisible = true;
-
-        public BasicEntity(Vector2 position)
+        public UiEntity(Vector2 position) : base(position)
         {
-            Position = position;
         }
 
         public bool IsMouseClick()
@@ -43,7 +38,7 @@ namespace AXNAEngine.com.axna.entity
 
         #region Collide functions
 
-        public bool CollideWith(BasicEntity gameEntity)
+        public bool CollideWith(UiEntity gameEntity)
         {
             Rectangle thisRectange = GetEntityRectangle();
             Rectangle collideRectange = gameEntity.GetEntityRectangle();

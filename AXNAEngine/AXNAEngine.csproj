@@ -36,11 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="com\axna\AXNA.cs" />
-    <Compile Include="com\axna\entity\BasicEntity.cs" />
+    <Compile Include="com\axna\entity\UiEntity.cs" />
     <Compile Include="com\axna\configuration\ParticleEngineConfiguration.cs" />
     <Compile Include="com\axna\Engine.cs" />
     <Compile Include="com\axna\entity\EngineEntity.cs" />
-    <Compile Include="com\axna\entity\GameEntity.cs" />
+    <Compile Include="com\axna\entity\GraphicEntity.cs" />
     <Compile Include="com\axna\graphics\Anim.cs" />
     <Compile Include="com\axna\graphics\background\Background.cs" />
     <Compile Include="com\axna\graphics\background\ParallaxBackground.cs" />
@@ -56,6 +56,9 @@
     <Compile Include="com\axna\managers\WorldManager.cs" />
     <Compile Include="com\axna\net\extension\DictionaryExtension.cs" />
     <Compile Include="com\axna\net\extension\RandomExtension.cs" />
+    <Compile Include="com\axna\tile.engine\Tileset.cs" />
+    <Compile Include="com\axna\tile.engine\TileMap.cs" />
+    <Compile Include="com\axna\tile.engine\TileMapCamera.cs" />
     <Compile Include="com\axna\ui\ClickableLabel.cs" />
     <Compile Include="com\axna\ui\SimpleButton.cs" />
     <Compile Include="com\axna\ui\TextLabel.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="com\fehaar\xna.tweener\Tweener.cs" />
     <Compile Include="com\testgame\ParticlesWorld.cs" />
     <Compile Include="com\testgame\TestWorld.cs" />
+    <Compile Include="com\testgame\TileMapWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +91,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>MonoGame\WindowsGL\Lidgren.Network.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MonoGame.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>MonoGame\WindowsGL\MonoGame.Framework.dll</HintPath>
@@ -96,10 +101,16 @@
       <HintPath>MonoGame\WindowsGL\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Tao.Sdl, Version=1.2.13.0, Culture=neutral, PublicKeyToken=9c7a200e36c0094e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>MonoGame\WindowsGL\Tao.Sdl.dll</HintPath>
+    </Reference>
+    <Reference Include="TiledSharp">
+      <HintPath>.\TiledSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +141,23 @@
     <Content Include="Content\Textures\TestTexture.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Base\Arial.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Textures\Tiles\part1_tileset.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Textures\Tiles\part2_tileset.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Tilemaps\ExampleMap.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

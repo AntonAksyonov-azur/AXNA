@@ -25,7 +25,7 @@ namespace AXNAEngine.com.testgame
 
             OwnParticleEngine = new ParticleEngine(ParticleTexture, new Point(0, 0), false);
 
-            GameEntity particleSystem = new GameEntity(OwnParticleEngine, 400, 300);
+            GraphicEntity particleSystem = new GraphicEntity(OwnParticleEngine, 400, 300);
             OwnParticleEngine.RandomVelocity = new Vector2(5, 5);
             //OwnParticleEngine.LocalVelocity = new Vector2(1, 1);
             OwnParticleEngine.EmitInterval = 1000;

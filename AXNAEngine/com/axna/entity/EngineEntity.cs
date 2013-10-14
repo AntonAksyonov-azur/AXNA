@@ -6,9 +6,14 @@ namespace AXNAEngine.com.axna.entity
     public class EngineEntity : DrawableGameComponent
     {
         public World ParentWorld;
+        public Vector2 Position;
 
-        public EngineEntity() : base(AXNA.Game)
+        public bool IsActive = true;
+        public bool IsVisible = true;
+
+        public EngineEntity(Vector2 position) : base(AXNA.Game)
         {
+            Position = position;
         }
     }
 }

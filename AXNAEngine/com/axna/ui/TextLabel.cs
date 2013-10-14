@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace AXNAEngine.com.axna.ui
 {
-    public class TextLabel : GameEntity
+    public class TextLabel : GraphicEntity
     {
         private readonly TextString _text;
 

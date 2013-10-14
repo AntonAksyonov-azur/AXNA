@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace AXNAEngine.com.axna.ui
 {
-    public class SimpleButton : BasicEntity
+    public class SimpleButton : UiEntity
     {
         /// <summary>
         /// При значении false запрещает кнопке вызывать функцию по клику.

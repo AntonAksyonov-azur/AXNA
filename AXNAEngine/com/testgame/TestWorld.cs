@@ -12,7 +12,7 @@ namespace AXNAEngine.com.testgame
 {
     public class TestWorld : RenderTargetWorld
     {
-        private GameEntity _entity;
+        private GraphicEntity _entity;
 
         public Spritemap spritemap;
 
@@ -27,7 +27,7 @@ namespace AXNAEngine.com.testgame
             
             Texture2D texture = AXNA.Content.Load<Texture2D>("Textures/morr");
             Image image = new Image(texture);
-            _entity = new GameEntity(image, 0, 0);
+            _entity = new GraphicEntity(image, 0, 0);
             /*
             spritemap = new Spritemap(texture, 177, 165);
 
@@ -37,7 +37,7 @@ namespace AXNAEngine.com.testgame
             //spritemap.AddAnimation("anim", Point.Zero, 23, 10, true);
             spritemap.PlayAnimation("anim");
             
-            _entity = new GameEntity(spritemap, 100, 100);
+            _entity = new GraphicEntity(spritemap, 100, 100);
             */
             AddEntity(_entity);
 

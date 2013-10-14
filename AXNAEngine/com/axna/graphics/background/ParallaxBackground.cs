@@ -4,13 +4,14 @@ using Microsoft.Xna.Framework;
 
 namespace AXNAEngine.com.axna.graphics.background
 {
-    class ParallaxBackground : EngineEntity
+    internal class ParallaxBackground : EngineEntity
     {
         public List<ParallaxTexture> Textures = new List<ParallaxTexture>();
         public int ViewportWidth;
         public int ViewportHeight;
 
         public ParallaxBackground(ParallaxTexture mainTexture, int viewportWidth, int viewportHeight)
+            : base(Vector2.Zero)
         {
             Textures.Add(mainTexture);
             ViewportWidth = viewportWidth;
@@ -28,12 +29,12 @@ namespace AXNAEngine.com.axna.graphics.background
                 for (int i = -1; i > -999; i++)
                 {
                     AXNA.SpriteBatch.Draw(current.Texture,
-                        new Rectangle(
-                            (int)current.X + i * current.Texture.Width,
-                            (int)current.Y,
-                            current.Texture.Width,
-                            current.IsStretchVertical ? ViewportHeight : current.Texture.Height),
-                            Color.White);
+                                          new Rectangle(
+                                              (int) current.X + i * current.Texture.Width,
+                                              (int) current.Y,
+                                              current.Texture.Width,
+                                              current.IsStretchVertical ? ViewportHeight : current.Texture.Height),
+                                          Color.White);
 
                     value += current.Texture.Width;
                     if (value > endValue)
@@ -52,6 +53,5 @@ namespace AXNAEngine.com.axna.graphics.background
                 current.Y += current.ParallaxSpeed * yOffset;
             }
         }
-
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AXNAEngine.com.axna.ui
 {
-    public class ClickableLabel : BasicEntity
+    public class ClickableLabel : UiEntity
     {
         public String Text { get; private set; }
         protected SpriteFont Font { get; private set; }

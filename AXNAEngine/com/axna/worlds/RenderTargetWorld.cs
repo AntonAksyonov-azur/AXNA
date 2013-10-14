@@ -37,7 +37,7 @@ namespace AXNAEngine.com.axna.worlds
             AXNA.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             AXNA.SpriteBatch.Begin();
-            foreach (GameEntity entity in Entities)
+            foreach (GraphicEntity entity in Entities)
             {
                 entity.Draw(gameTime);
             }
