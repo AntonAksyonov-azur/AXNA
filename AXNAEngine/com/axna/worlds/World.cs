@@ -7,9 +7,9 @@ namespace AXNAEngine.com.axna.worlds
 {
     public class World
     {
-        protected readonly List<BasicEntity> AddList = new List<BasicEntity>();
-        protected readonly List<BasicEntity> RemoveList = new List<BasicEntity>();
-        protected readonly List<BasicEntity> Entities = new List<BasicEntity>();
+        protected readonly List<EngineEntity> AddList = new List<EngineEntity>();
+        protected readonly List<EngineEntity> RemoveList = new List<EngineEntity>();
+        protected readonly List<EngineEntity> Entities = new List<EngineEntity>();
         protected Color ClearColor = Color.CornflowerBlue;
 
         public World(String name)
@@ -21,7 +21,7 @@ namespace AXNAEngine.com.axna.worlds
 
         #region Public Methods
 
-        public void AddEntity(BasicEntity gameEntity)
+        public void AddEntity(EngineEntity gameEntity)
         {
             if (gameEntity == null)
             {
@@ -30,7 +30,7 @@ namespace AXNAEngine.com.axna.worlds
             AddList.Add(gameEntity);
         }
 
-        public void RemoveEntity(BasicEntity gameEntity)
+        public void RemoveEntity(EngineEntity gameEntity)
         {
             if (gameEntity != null)
             {
