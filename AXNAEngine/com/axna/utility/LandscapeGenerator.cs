@@ -54,10 +54,8 @@ namespace AXNAEngine.com.axna.utility
                     if (seed.X >= mapWidth || seed.X < 0 ||
                         seed.Y >= mapHeight || seed.Y < 0)
                     {
-                        seed = new Seed(
-                            rnd.Next(0, mapWidth),
-                            rnd.Next(0, mapHeight),
-                            availableLandscapeIds.GetRandomItem());
+                        seed.X = rnd.Next(0, mapWidth);
+                        seed.Y = rnd.Next(0, mapHeight);
                     }
                     resultMap[seed.Y, seed.X] = seed.LandscapeValue;
                 }
