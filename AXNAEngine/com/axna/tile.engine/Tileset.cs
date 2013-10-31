@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace AXNAEngine.com.axna.tile.engine.p2
+namespace AXNAEngine.com.axna.tile.engine
 {
     public class TileSet
     {

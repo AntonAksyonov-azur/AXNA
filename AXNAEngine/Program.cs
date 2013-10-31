@@ -15,7 +15,7 @@ namespace AXNAEngine
         {
             Engine game = new Engine(800, 600);
 
-            AXNA.WorldManager.ActivateWorld(new TileMapWorld());
+            AXNA.WorldManager.ActivateWorld(new TileMapIsometricWorld());
 
             game.Run();
         }

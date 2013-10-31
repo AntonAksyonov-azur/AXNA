@@ -83,7 +83,8 @@
     <Compile Include="com\fehaar\xna.tweener\Tweener.cs" />
     <Compile Include="com\testgame\ParticlesWorld.cs" />
     <Compile Include="com\testgame\TestWorld.cs" />
-    <Compile Include="com\testgame\TileMapWorld.cs" />
+    <Compile Include="com\testgame\TileMapHex.cs" />
+    <Compile Include="com\testgame\TileMapIsometricWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
