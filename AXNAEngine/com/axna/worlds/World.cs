@@ -119,5 +119,10 @@ namespace AXNAEngine.com.axna.worlds
 
             return result;
         }
+
+        public void SetClearColor(Color clearColor)
+        {
+            ClearColor = clearColor;
+        }
     }
 }

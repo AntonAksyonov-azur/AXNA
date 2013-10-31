@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AXNAEngine.com.axna;
+﻿using AXNAEngine.com.axna;
 using AXNAEngine.com.axna.managers;
 using AXNAEngine.com.axna.tile.engine;
 using AXNAEngine.com.axna.tile.engine.map;
@@ -10,7 +6,6 @@ using AXNAEngine.com.axna.worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using TiledSharp;
 
 namespace AXNAEngine.com.testgame
 {
@@ -18,8 +13,8 @@ namespace AXNAEngine.com.testgame
     {
         private const int TileWidth = 33;
         private const int TileHeight = 27;
-        
-        private OrtogonalTmxTileMap _map;
+
+        private HexArrayTileMap _map;
         private float _tileMapScrollSpeed;
         private TileMapCamera _tileMapCamera;
         private Vector2 _oldMousePos;
@@ -29,14 +24,69 @@ namespace AXNAEngine.com.testgame
         public TileMapHexWorld() : base("TileMapHexWorld")
         {
         }
+
+        private int[,] GetMapData()
+        {
+            var result = new int[10, 10];
+            // Create Sample Map Data
+            result[0, 3] = 3;
+            result[0, 4] = 3;
+            result[0, 5] = 1;
+            result[0, 6] = 1;
+            result[0, 7] = 1;
+
+            result[1, 3] = 3;
+            result[1, 4] = 1;
+            result[1, 5] = 1;
+            result[1, 6] = 1;
+            result[1, 7] = 1;
+
+            result[2, 2] = 3;
+            result[2, 3] = 1;
+            result[2, 4] = 1;
+            result[2, 5] = 1;
+            result[2, 6] = 1;
+            result[2, 7] = 1;
+
+            result[3, 2] = 3;
+            result[3, 3] = 1;
+            result[3, 4] = 1;
+            result[3, 5] = 2;
+            result[3, 6] = 2;
+            result[3, 7] = 2;
+
+            result[4, 2] = 3;
+            result[4, 3] = 1;
+            result[4, 4] = 1;
+            result[4, 5] = 2;
+            result[4, 6] = 2;
+            result[4, 7] = 2;
+
+            result[5, 2] = 3;
+            result[5, 3] = 1;
+            result[5, 4] = 1;
+            result[5, 5] = 2;
+            result[5, 6] = 2;
+            result[5, 7] = 2;
+
+            return result;
+        }
+
         public override void OnInitialize()
         {
-            var tmxFormatData = new TmxMap(string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ExampleMap.tmx"));
-            var tileset = new TileSet(AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part3_tileset"), TileWidth, TileHeight);
-            _tileMapCamera = new TileMapCamera(20, 20);
-            _map = new OrtogonalTmxTileMap(Vector2.Zero, tileset, tmxFormatData, _tileMapCamera);
+            var tileset = new TileSet(AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part3_tileset"), TileWidth,
+                TileHeight);
+            _tileMapCamera = new TileMapCamera(10, 10);
+            _map = new HexArrayTileMap(
+                GetMapData(),
+                Vector2.Zero,
+                tileset, 10, 10,
+                _tileMapCamera,
+                52, 14, 26);
             AddEntity(_map);
 
+
+            SetClearColor(Color.Black);
             _tileMapScrollSpeed = tileset.TileWidth * 3;
         }
 
@@ -55,7 +105,7 @@ namespace AXNAEngine.com.testgame
                 var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.GetMousePositionToVector2();
                 var vectorZero = Vector2.Zero;
                 var vectorBorder = new Vector2((_map.MapWidth - _tileMapCamera.SquaresAcross) * TileWidth,
-                                               (_map.MapHeight - _tileMapCamera.SquaresDown) * TileHeight);
+                    (_map.MapHeight - _tileMapCamera.SquaresDown) * TileHeight);
 
                 Vector2.Clamp(
                     ref newCameraPos,
