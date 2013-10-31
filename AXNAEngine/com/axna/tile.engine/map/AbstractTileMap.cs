@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using AXNAEngine.com.axna.entity;
 using Microsoft.Xna.Framework;
 
-namespace AXNAEngine.com.axna.tile.engine
+namespace AXNAEngine.com.axna.tile.engine.map
 {
     public abstract class AbstractTileMap : EngineEntity
     {

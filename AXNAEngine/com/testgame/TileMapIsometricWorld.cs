@@ -1,6 +1,7 @@
 ﻿using AXNAEngine.com.axna;
 using AXNAEngine.com.axna.managers;
 using AXNAEngine.com.axna.tile.engine;
+using AXNAEngine.com.axna.tile.engine.map;
 using AXNAEngine.com.axna.worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,7 +14,7 @@ namespace AXNAEngine.com.testgame
     {
         private const int TileSize = 48;
 
-        private TileMap _map;
+        private OrtogonalTmxTileMap _map;
         private float _tileMapScrollSpeed;
         private TileMapCamera _tileMapCamera;
         private Vector2 _oldMousePos;
@@ -29,7 +30,7 @@ namespace AXNAEngine.com.testgame
             var tmxFormatData = new TmxMap(string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ExampleMap.tmx"));
             var tileset = new TileSet(AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part2_tileset"), TileSize, TileSize);
             _tileMapCamera = new TileMapCamera(20, 20);
-            _map = new TileMap(Vector2.Zero, tileset, tmxFormatData, _tileMapCamera);
+            _map = new OrtogonalTmxTileMap(Vector2.Zero, tileset, tmxFormatData, _tileMapCamera);
             AddEntity(_map);
 
             _tileMapScrollSpeed = tileset.TileWidth * 3;

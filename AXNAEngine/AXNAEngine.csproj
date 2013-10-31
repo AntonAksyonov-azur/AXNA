@@ -56,9 +56,10 @@
     <Compile Include="com\axna\managers\WorldManager.cs" />
     <Compile Include="com\axna\net\extension\DictionaryExtension.cs" />
     <Compile Include="com\axna\net\extension\RandomExtension.cs" />
-    <Compile Include="com\axna\tile.engine\AbstractTileMap.cs" />
+    <Compile Include="com\axna\tile.engine\map\AbstractTileMap.cs" />
+    <Compile Include="com\axna\tile.engine\map\HexArrayTileMap.cs" />
     <Compile Include="com\axna\tile.engine\Tileset.cs" />
-    <Compile Include="com\axna\tile.engine\TileMap.cs" />
+    <Compile Include="com\axna\tile.engine\map\OrtogonalTmxTileMap.cs" />
     <Compile Include="com\axna\tile.engine\TileMapCamera.cs" />
     <Compile Include="com\axna\ui\ClickableLabel.cs" />
     <Compile Include="com\axna\ui\SimpleButton.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="com\fehaar\xna.tweener\Tweener.cs" />
     <Compile Include="com\testgame\ParticlesWorld.cs" />
     <Compile Include="com\testgame\TestWorld.cs" />
-    <Compile Include="com\testgame\TileMapHex.cs" />
+    <Compile Include="com\testgame\TileMapHexWorld.cs" />
     <Compile Include="com\testgame\TileMapIsometricWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -152,6 +153,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Content\Textures\Tiles\part2_tileset.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Textures\Tiles\part3_tileset.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Content\Tilemaps\ExampleMap.tmx">

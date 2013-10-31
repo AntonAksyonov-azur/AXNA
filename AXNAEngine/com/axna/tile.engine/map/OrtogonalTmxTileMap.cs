@@ -1,15 +1,14 @@
-﻿using AXNAEngine.com.axna.entity;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TiledSharp;
 
-namespace AXNAEngine.com.axna.tile.engine
+namespace AXNAEngine.com.axna.tile.engine.map
 {
-    public class TileMap : AbstractTileMap
+    public class OrtogonalTmxTileMap : AbstractTileMap
     {
         private readonly TmxMap _tmxFormatData;
 
-        public TileMap(Vector2 position, TileSet tileSet, TmxMap tmxFormatData, TileMapCamera camera)
+        public OrtogonalTmxTileMap(Vector2 position, TileSet tileSet, TmxMap tmxFormatData, TileMapCamera camera)
             : base(position, tileSet, tmxFormatData.Width, tmxFormatData.Height, camera)
         {
             _tmxFormatData = tmxFormatData;
