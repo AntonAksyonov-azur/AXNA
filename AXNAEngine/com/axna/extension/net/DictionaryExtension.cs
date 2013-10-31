@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AXNAEngine.com.axna.net.extension
+namespace AXNAEngine.com.axna.extension.net
 {
     public static class DictionaryExtension
     {

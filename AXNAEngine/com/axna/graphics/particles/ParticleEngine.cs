@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AXNAEngine.com.axna.configuration;
-using AXNAEngine.com.axna.net.extension;
+using AXNAEngine.com.axna.extension.net;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

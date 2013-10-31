@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AXNAEngine.com.axna.net.extension
+namespace AXNAEngine.com.axna.extension.net
 {
     public static class RandomExtensions
     {
