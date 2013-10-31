@@ -47,7 +47,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
                         rowOffset = _oddRowXOffset;
                     }
 
-                    if (_mapData[x + firstX, y + firstY] > -1)
+                    if (_mapData[y + firstY, x + firstX] > -1)
                     {
                         AXNA.SpriteBatch.Draw(
                             TileSet.TileSetTexture,
@@ -55,7 +55,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
                                 (int) ((x * _tileStepX) - squareOffset.X + rowOffset),
                                 (int) ((y * _tileStepY) - squareOffset.Y),
                                 TileSet.TileWidth, TileSet.TileHeight),
-                            TileSet.GetSourceRectangle(_mapData[x + firstX, y + firstY]),
+                            TileSet.GetSourceRectangle(_mapData[y + firstY, x + firstX]),
                             Color.White);
                     }
                 }
