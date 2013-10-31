@@ -18,9 +18,9 @@ namespace AXNAEngine.com.axna.utility
             var resultMap = new int[mapHeight, mapWidth];
 
             // Clear
-            for (int i = 0; i < mapWidth; i++)
+            for (int i = 0; i < mapHeight; i++)
             {
-                for (int j = 0; j < mapHeight; j++)
+                for (int j = 0; j < mapWidth; j++)
                 {
                     resultMap[i, j] = emptyCellId;
                 }
@@ -34,8 +34,8 @@ namespace AXNAEngine.com.axna.utility
             for (int i = 0; i < seedsCount; i++)
             {
                 var seed = new Seed(
-                    rnd.Next(0, mapWidth - 1),
-                    rnd.Next(0, mapHeight - 1),
+                    rnd.Next(0, mapWidth),
+                    rnd.Next(0, mapHeight),
                     availableLandscapeIds.GetRandomItem());
                 seeds.Add(seed);
                 resultMap[seed.Y, seed.X] = seed.LandscapeValue;
@@ -51,11 +51,12 @@ namespace AXNAEngine.com.axna.utility
                     seed.X += direction.X;
                     seed.Y += direction.Y;
 
-                    if (seed.X > mapWidth || seed.Y < mapHeight)
+                    if (seed.X >= mapWidth || seed.X < 0 ||
+                        seed.Y >= mapHeight || seed.Y < 0)
                     {
                         seed = new Seed(
-                            rnd.Next(0, mapWidth - 1),
-                            rnd.Next(0, mapHeight - 1),
+                            rnd.Next(0, mapWidth),
+                            rnd.Next(0, mapHeight),
                             availableLandscapeIds.GetRandomItem());
                     }
                     resultMap[seed.Y, seed.X] = seed.LandscapeValue;
@@ -101,7 +102,7 @@ namespace AXNAEngine.com.axna.utility
             return result;
         }
 
-        private struct Seed
+        private class Seed
         {
             public int X;
             public int Y;
