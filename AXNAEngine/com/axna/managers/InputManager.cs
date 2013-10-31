@@ -79,12 +79,12 @@ namespace AXNAEngine.com.axna.managers
             return _mouseState.ScrollWheelValue < _mouseOldState.ScrollWheelValue;
         }
 
-        public static Vector2 GetMousePositionToVector2()
+        public static Vector2 MousePositionToVector2()
         {
             return new Vector2(_mouseState.X, _mouseState.Y);
         }
 
-        public static Point GetMousePositionToPoint()
+        public static Point MousePositionToPoint()
         {
             return new Point(_mouseState.X, _mouseState.Y);
         }

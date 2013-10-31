@@ -43,12 +43,12 @@ namespace AXNAEngine.com.testgame
                _isMouseDrag = true;
 
                _oldCameraPos = _tileMapCamera.Location;
-               _oldMousePos = InputManager.GetMousePositionToVector2();
+               _oldMousePos = InputManager.MousePositionToVector2();
            }
 
             if (_isMouseDrag)
             {
-                var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.GetMousePositionToVector2();
+                var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.MousePositionToVector2();
                 var vectorZero = Vector2.Zero;
                 var vectorBorder = new Vector2((_map.MapWidth - _tileMapCamera.SquaresAcross) * TileSize,
                                                (_map.MapHeight - _tileMapCamera.SquaresDown) * TileSize);

@@ -20,7 +20,7 @@ namespace AXNAEngine.com.axna.entity
         public bool CollideMouse()
         {
             Rectangle thisRectange = GetEntityRectangle();
-            Point mousePosition = InputManager.GetMousePositionToPoint();
+            Point mousePosition = InputManager.MousePositionToPoint();
 
             return thisRectange.Contains(mousePosition.X, mousePosition.Y);
         }

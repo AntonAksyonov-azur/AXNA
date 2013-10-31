@@ -8,14 +8,17 @@ namespace AXNAEngine.com.axna.tile.engine.map
         private int _tileStepX;
         private int _tileStepY;
         private int _oddRowXOffset;
+        private int _globalOffsetX;
+        private int _globalOffsetY;
 
         public HexArrayTileMap(
             int[,] mapData,
+            int mapWidth, int mapHeight,
             Vector2 position,
             TileSet tileSet,
-            int mapWidth, int mapHeight,
             TileMapCamera camera,
-            int tileStepX, int tileStepY, int oddRowOffsetX) :
+            int tileStepX, int tileStepY, int oddRowOffsetX,
+            int globalOffsetX = 0, int globalOffsetY = 0) :
                 base(position, tileSet, mapWidth, mapHeight, camera)
         {
             _mapData = mapData;
@@ -23,6 +26,9 @@ namespace AXNAEngine.com.axna.tile.engine.map
             _tileStepX = tileStepX;
             _tileStepY = tileStepY;
             _oddRowXOffset = oddRowOffsetX;
+
+            _globalOffsetX = globalOffsetX;
+            _globalOffsetY = globalOffsetY;
         }
 
         public override void Draw(GameTime gameTime)
@@ -52,8 +58,8 @@ namespace AXNAEngine.com.axna.tile.engine.map
                         AXNA.SpriteBatch.Draw(
                             TileSet.TileSetTexture,
                             new Rectangle(
-                                (int) ((x * _tileStepX) - squareOffset.X + rowOffset),
-                                (int) ((y * _tileStepY) - squareOffset.Y),
+                                (int)((x * _tileStepX) - squareOffset.X + rowOffset + _globalOffsetX),
+                                (int)((y * _tileStepY) - squareOffset.Y + _globalOffsetY),
                                 TileSet.TileWidth, TileSet.TileHeight),
                             TileSet.GetSourceRectangle(_mapData[y + firstY, x + firstX]),
                             Color.White);
