@@ -1,44 +1,31 @@
 ﻿using AXNAEngine.com.axna.entity;
-using AXNAEngine.com.axna.tile.engine.p2;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TiledSharp;
 
 namespace AXNAEngine.com.axna.tile.engine
 {
-    public class TileMap : EngineEntity
+    public class TileMap : AbstractTileMap
     {
-        private TileSet _tileSet;
-        private TmxMap _tmxFormatData;
+        private readonly TmxMap _tmxFormatData;
 
-        public int MapWidth { get; private set; }
-        public int MapHeight { get; private set; }
-        public TileMapCamera Camera;
-
-        public TileMap(Vector2 position, TileSet tileSet, TmxMap tmxFormatData, TileMapCamera camera) : base(position)
+        public TileMap(Vector2 position, TileSet tileSet, TmxMap tmxFormatData, TileMapCamera camera)
+            : base(position, tileSet, tmxFormatData.Width, tmxFormatData.Height, camera)
         {
-            _tileSet = tileSet;
             _tmxFormatData = tmxFormatData;
-
-            MapWidth = tmxFormatData.Width;
-            MapHeight = tmxFormatData.Height;
-
-            Camera = camera;
         }
 
         public override void Draw(GameTime gameTime)
         {
             var firstSquare = new Vector2(
-                Camera.Location.X / _tileSet.TileWidth,
-                Camera.Location.Y / _tileSet.TileHeight);
-            var firstX = (int) firstSquare.X;
-            var firstY = (int) firstSquare.Y;
+                Camera.Location.X / TileSet.TileWidth,
+                Camera.Location.Y / TileSet.TileHeight);
+            var firstX = (int)firstSquare.X;
+            var firstY = (int)firstSquare.Y;
 
             var squareOffset = new Vector2(
-                Camera.Location.X % _tileSet.TileWidth,
-                Camera.Location.Y % _tileSet.TileHeight);
-            var offsetX = (int) squareOffset.X;
-            var offsetY = (int) squareOffset.Y;
+                Camera.Location.X % TileSet.TileWidth,
+                Camera.Location.Y % TileSet.TileHeight);
 
             foreach (var layer in _tmxFormatData.Layers)
             {
@@ -54,12 +41,12 @@ namespace AXNAEngine.com.axna.tile.engine
                         if (gid > -1)
                         {
                             AXNA.SpriteBatch.Draw(
-                                texture: _tileSet.TileSetTexture,
+                                texture: TileSet.TileSetTexture,
                                 destinationRectangle:
-                                    new Rectangle((x * _tileSet.TileWidth) - offsetX,
-                                                  (y * _tileSet.TileHeight) - offsetY,
-                                                  _tileSet.TileWidth, _tileSet.TileHeight),
-                                sourceRectangle: _tileSet.GetSourceRectangle(gid),
+                                    new Rectangle((int)((x * TileSet.TileWidth) - squareOffset.X),
+                                                  (int)((y * TileSet.TileHeight) - squareOffset.Y),
+                                                  TileSet.TileWidth, TileSet.TileHeight),
+                                sourceRectangle: TileSet.GetSourceRectangle(gid),
                                 color: Color.White,
                                 rotation: 0.0f,
                                 origin: Vector2.Zero,
