@@ -23,6 +23,9 @@ namespace AXNAEngineContent
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            _graphics.PreferredBackBufferWidth = 1280;
+            IsMouseVisible = true;
         }
 
         /// <summary>
