@@ -46,8 +46,8 @@ namespace AXNAEngine.com.testgame
             _tileMapCamera = new TileMapCamera(50, 50);
 
             _map =
-                new IsometricDiamondTmxMap(new Vector2(400, 0), tileset, tmxFormatData, _tileMapCamera);
-//                new IsometricZigZagTmxMap(new Vector2(0, 0), tileset, tmxFormatData, _tileMapCamera);
+//                new IsometricDiamondTmxMap(new Vector2(400, 0), tileset, tmxFormatData, _tileMapCamera);
+                new IsometricZigZagTmxMap(new Vector2(0, 0), tileset, tmxFormatData, _tileMapCamera);
             AddEntity(_map);
 
             _tileMapScrollSpeed = tileset.TileWidth * 3;
