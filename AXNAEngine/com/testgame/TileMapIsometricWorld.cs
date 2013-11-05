@@ -1,4 +1,6 @@
 ﻿using AXNAEngine.com.axna;
+using AXNAEngine.com.axna.entity;
+using AXNAEngine.com.axna.graphics;
 using AXNAEngine.com.axna.managers;
 using AXNAEngine.com.axna.tile.engine;
 using AXNAEngine.com.axna.tile.engine.map;
@@ -12,9 +14,9 @@ namespace AXNAEngine.com.testgame
 {
     public class TileMapIsometricWorld : World
     {
-        private const int TileSize = 48;
+        private const int TileSize = 64;
 
-        private OrtogonalTmxTileMap _map;
+        private AbstractTileMap _map;
         private float _tileMapScrollSpeed;
         private TileMapCamera _tileMapCamera;
         private Vector2 _oldMousePos;
@@ -27,10 +29,20 @@ namespace AXNAEngine.com.testgame
 
         public override void OnInitialize()
         {
-            var tmxFormatData = new TmxMap(string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ExampleMap.tmx"));
-            var tileset = new TileSet(AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part2_tileset"), TileSize, TileSize);
-            _tileMapCamera = new TileMapCamera(20, 20);
-            _map = new OrtogonalTmxTileMap(Vector2.Zero, tileset, tmxFormatData, _tileMapCamera);
+            var tmxFormatData = new TmxMap(
+               ///string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/IsometricMap.tmx"));
+                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap2.tmx"));
+
+            var tileset = new TileSet(
+                AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part4_tileset"),
+                64, 64,
+                64, 32,
+                0, 
+                32, 32);
+
+            _tileMapCamera = new TileMapCamera(30, 30);
+
+            _map = new IsometricZigZagTmxMap(new Vector2(32, 64), tileset, tmxFormatData, _tileMapCamera);
             AddEntity(_map);
 
             _tileMapScrollSpeed = tileset.TileWidth * 3;
@@ -38,25 +50,25 @@ namespace AXNAEngine.com.testgame
 
         public override void OnUpdate(GameTime gameTime)
         {
-           if (InputManager.IsMouseLeftDown() && !_isMouseDrag)
-           {
-               _isMouseDrag = true;
+            if (InputManager.IsMouseLeftDown() && !_isMouseDrag)
+            {
+                _isMouseDrag = true;
 
-               _oldCameraPos = _tileMapCamera.Location;
-               _oldMousePos = InputManager.MousePositionToVector2();
-           }
+                _oldCameraPos = _tileMapCamera.Location;
+                _oldMousePos = InputManager.MousePositionToVector2();
+            }
 
             if (_isMouseDrag)
             {
                 var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.MousePositionToVector2();
                 var vectorZero = Vector2.Zero;
                 var vectorBorder = new Vector2((_map.MapWidth - _tileMapCamera.SquaresAcross) * TileSize,
-                                               (_map.MapHeight - _tileMapCamera.SquaresDown) * TileSize);
+                    (_map.MapHeight - _tileMapCamera.SquaresDown) * TileSize);
 
                 Vector2.Clamp(
                     ref newCameraPos,
-                    ref vectorZero, 
-                    ref vectorBorder, 
+                    ref vectorZero,
+                    ref vectorBorder,
                     out _tileMapCamera.Location);
             }
 

@@ -59,6 +59,8 @@
     <Compile Include="com\axna\extension\net\RandomExtension.cs" />
     <Compile Include="com\axna\tile.engine\map\AbstractTileMap.cs" />
     <Compile Include="com\axna\tile.engine\map\HexArrayTileMap.cs" />
+    <Compile Include="com\axna\tile.engine\map\IsometricDiamondTmxMap.cs" />
+    <Compile Include="com\axna\tile.engine\map\IsometricZigZagTmxMap.cs" />
     <Compile Include="com\axna\tile.engine\Tileset.cs" />
     <Compile Include="com\axna\tile.engine\map\OrtogonalTmxTileMap.cs" />
     <Compile Include="com\axna\tile.engine\TileMapCamera.cs" />
@@ -160,7 +162,28 @@
     <None Include="Content\Textures\Tiles\part3_tileset.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Textures\Tiles\part4_tileset.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Textures\Tiles\part4_tileset_num.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Tilemaps\CheckOrderMap.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Tilemaps\ExampleMap.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Tilemaps\IsometricMap.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Tilemaps\ZigZagMap.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Tilemaps\ZigZagMap2.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Tilemaps\ZigZagMap3.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

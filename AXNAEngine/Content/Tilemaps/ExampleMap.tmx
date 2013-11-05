@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="48" tileheight="48">
  <tileset firstgid="1" name="part2_tileset" tilewidth="48" tileheight="48">
-  <image source="F:/Buffer Area/Downloads/part2_tileset.png" width="576" height="480"/>
+  <image source="D:\Work\C#\AXNA\AXNA\AXNAEngineContent\AXNAEngineContentContent\Textures\Tiles\part2_tileset.png" width="576" height="480"/>
  </tileset>
  <layer name="Terrain" width="50" height="50">
   <data>

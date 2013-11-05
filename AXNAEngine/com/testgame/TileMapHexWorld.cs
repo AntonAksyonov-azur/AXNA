@@ -35,18 +35,22 @@ namespace AXNAEngine.com.testgame
             int mapWidth = 100;
             int mapHeight = 100;
 
-            var tileset = new TileSet(AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part3_tileset"), TileWidth,
-                TileHeight);
-            _tileMapCamera = new TileMapCamera(17, 48);
+            var tileset = new TileSet(
+                AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part3_tileset"),
+                TileWidth, TileHeight,
+                TileStepX, TileStepY,
+                OddRowX,
+                -14, -14);
+
+            _tileMapCamera = new TileMapCamera(10, 10);
+
             _map = new HexArrayTileMap(
                 LandscapeGenerator.GenerateLandscape(mapWidth, mapHeight, new List<int> {1, 2, 3, 4},
                     LandscapeGenerator.GenerateNESW(), 25, 300),
                 mapWidth, mapHeight,
                 Vector2.Zero,
                 tileset,
-                _tileMapCamera,
-                TileStepX, TileStepY, OddRowX,
-                - 14, -14);
+                _tileMapCamera);
             AddEntity(_map);
 
 
