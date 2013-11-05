@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace AXNAEngine.com.axna.tile.engine.map
 {
-    public abstract class AbstractTileMap : EngineEntity
+    public abstract class AbstractTileMap : GraphicEntity
     {
         protected TileSet TileSet;
         public int MapWidth { get; private set; }
@@ -12,7 +12,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
         public TileMapCamera Camera { get; private set; }
 
         protected AbstractTileMap(Vector2 position, TileSet tileSet, int mapWidth, int mapHeight, TileMapCamera camera)
-            : base(position)
+            : base(null, position.X, position.Y)
         {
             TileSet = tileSet;
 
