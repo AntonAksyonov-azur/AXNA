@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TiledSharp;
 
@@ -24,10 +23,8 @@ namespace AXNAEngine.com.axna.tile.engine.map
             var firstY = (int) firstSquare.Y;
 
             var squareOffset = new Vector2(
-                Camera.Location.X % TileSet.TileStepX,
-                Camera.Location.Y % TileSet.TileStepY);
-
-            Console.WriteLine("offset square: {0}", squareOffset);
+                Camera.Location.X % TileSet.TileStepX / 2,
+                Camera.Location.Y % TileSet.TileStepY / 2);
 
             foreach (var layer in _tmxFormatData.Layers)
             {
@@ -44,7 +41,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
                         {
                             var destPoint = new Vector2(
                                 ((x - y) * (float) TileSet.TileStepX / 2) - squareOffset.X + Position.X,
-                                ((x + y) * (float) TileSet.TileStepY / 2) - squareOffset.Y / 2 + Position.Y);
+                                ((x + y) * (float) TileSet.TileStepY / 2) - squareOffset.Y + Position.Y);
 
                             AXNA.SpriteBatch.Draw(
                                 texture: TileSet.TileSetTexture,

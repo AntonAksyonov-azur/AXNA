@@ -27,8 +27,6 @@ namespace AXNAEngine.com.axna.tile.engine.map
                 Camera.Location.X % TileSet.TileStepX,
                 Camera.Location.Y % TileSet.TileStepY);
 
-            Console.WriteLine("cameraY: {0}, offsetY: {1}", firstY, squareOffset.Y);
-
             foreach (var layer in _tmxFormatData.Layers)
             {
                 if (!layer.Visible) continue;
