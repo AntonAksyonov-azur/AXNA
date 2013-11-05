@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TiledSharp;
 
@@ -23,8 +24,10 @@ namespace AXNAEngine.com.axna.tile.engine.map
             var firstY = (int) firstSquare.Y;
 
             var squareOffset = new Vector2(
-                Camera.Location.X % TileSet.TileWidth,
-                Camera.Location.Y);
+                Camera.Location.X % TileSet.TileStepX,
+                Camera.Location.Y % TileSet.TileStepY);
+
+            Console.WriteLine("cameraY: {0}, offsetY: {1}", firstY, squareOffset.Y);
 
             foreach (var layer in _tmxFormatData.Layers)
             {
@@ -40,10 +43,9 @@ namespace AXNAEngine.com.axna.tile.engine.map
                         if (gid > -1)
                         {
                             var offsetX = tile.Y % 2 != 0 ? TileSet.TileWidth / 2 : 0;
-
                             var destPoint = new Vector2(
-                                (x * (float) TileSet.TileStepX) + offsetX - (int)squareOffset.X + Position.X,
-                                (y * (float) TileSet.TileStepY / 2) - (int)squareOffset.Y + Position.Y);
+                                (x * TileSet.TileStepX) + offsetX - squareOffset.X + Position.X,
+                                (y * (float) TileSet.TileStepY / 2) - squareOffset.Y / 2 + Position.Y);
 
                             AXNA.SpriteBatch.Draw(
                                 texture: TileSet.TileSetTexture,
@@ -56,6 +58,10 @@ namespace AXNAEngine.com.axna.tile.engine.map
                                         (tile.VerticalFlip ? SpriteEffects.FlipVertically : SpriteEffects.None),
                                 depth: 1.0f,
                                 scale: 1.0f);
+                            /*
+                            AXNA.SpriteBatch.DrawRectangle(destPoint, new Vector2(64, 64),
+                                new Color(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255)));
+                             */
                         }
                     }
                 }

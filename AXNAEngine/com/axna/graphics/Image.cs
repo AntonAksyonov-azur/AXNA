@@ -25,6 +25,7 @@ namespace AXNAEngine.com.axna.graphics
         public override void Render(SpriteBatch spriteBatch, Vector2 position)
         {
             if (!IsVisible) return;
+            if (Texture == null) return;
 
             spriteBatch.Draw(
                 Texture,
@@ -40,6 +41,7 @@ namespace AXNAEngine.com.axna.graphics
         #region Transformations
 
         #region Color
+
         public void SetOverlayColor(Color overlayColor)
         {
             OverlayColor = overlayColor;
@@ -49,9 +51,11 @@ namespace AXNAEngine.com.axna.graphics
         {
             return OverlayColor.ToVector4() != Vector4.Zero ? OverlayColor : Color.White;
         }
+
         #endregion
 
         #region Origin
+
         public void SetOrigin(Vector2 newOrigin)
         {
             Origin = newOrigin;
@@ -64,23 +68,29 @@ namespace AXNAEngine.com.axna.graphics
         {
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
         }
+
         #endregion
 
         #region SpriteEffects
+
         public void SetSpriteEffect(SpriteEffects spriteEffect)
         {
             SpriteEffect = spriteEffect;
         }
+
         #endregion
 
         #region Scale
+
         public virtual void SetScaleByValue(float scaleValue)
         {
             Scale = scaleValue;
         }
+
         #endregion
 
         #region Rotation
+
         /// <summary>
         /// Устанавливает угол поворота текстуры изображения. Значение должно быть указано в радианах
         /// </summary>
@@ -98,6 +108,7 @@ namespace AXNAEngine.com.axna.graphics
         {
             Angle = degrees * MathHelper.Pi / 180;
         }
+
         #endregion
 
         #endregion

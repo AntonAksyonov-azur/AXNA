@@ -29,20 +29,25 @@ namespace AXNAEngine.com.testgame
 
         public override void OnInitialize()
         {
+            AddEntity(new GraphicEntity(new Image(null), 0, 0));
+            AddEntity(new GraphicEntity(new Image(null), 0, 32 * 8));
+
             var tmxFormatData = new TmxMap(
-               ///string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/IsometricMap.tmx"));
+//                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/IsometricMap.tmx"));
                 string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap2.tmx"));
 
             var tileset = new TileSet(
                 AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part4_tileset"),
                 64, 64,
                 64, 32,
-                0, 
+                32,
                 32, 32);
 
-            _tileMapCamera = new TileMapCamera(30, 30);
+            _tileMapCamera = new TileMapCamera(50, 50);
 
-            _map = new IsometricZigZagTmxMap(new Vector2(32, 64), tileset, tmxFormatData, _tileMapCamera);
+            _map =
+                new IsometricDiamondTmxMap(new Vector2(400, 0), tileset, tmxFormatData, _tileMapCamera);
+//                new IsometricZigZagTmxMap(new Vector2(0, 0), tileset, tmxFormatData, _tileMapCamera);
             AddEntity(_map);
 
             _tileMapScrollSpeed = tileset.TileWidth * 3;
@@ -62,8 +67,9 @@ namespace AXNAEngine.com.testgame
             {
                 var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.MousePositionToVector2();
                 var vectorZero = Vector2.Zero;
-                var vectorBorder = new Vector2((_map.MapWidth - _tileMapCamera.SquaresAcross) * TileSize,
-                    (_map.MapHeight - _tileMapCamera.SquaresDown) * TileSize);
+                var vectorBorder = new Vector2(
+                    (_map.MapWidth - _tileMapCamera.SquaresAcross) * 64,
+                    (_map.MapHeight - _tileMapCamera.SquaresDown) * 32);
 
                 Vector2.Clamp(
                     ref newCameraPos,

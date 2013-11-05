@@ -44,7 +44,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
                         {
                             var destPoint = new Vector2(
                                 ((x - y) * (float) TileSet.TileStepX / 2) - squareOffset.X + Position.X,
-                                ((x + y) * (float) TileSet.TileStepY / 2) - squareOffset.Y + Position.Y);
+                                ((x + y) * (float) TileSet.TileStepY / 2) - squareOffset.Y / 2 + Position.Y);
 
                             AXNA.SpriteBatch.Draw(
                                 texture: TileSet.TileSetTexture,
