@@ -17,6 +17,8 @@ namespace AXNAEngine.com.axna.tile.engine.map
 
         public override void Draw(GameTime gameTime)
         {
+            var font = AXNA.Content.Load<SpriteFont>(@"Base/Arial");
+
             var firstSquare = new Vector2(
                 Camera.Location.X / TileSet.TileStepX,
                 Camera.Location.Y / TileSet.TileStepY);
@@ -56,10 +58,6 @@ namespace AXNAEngine.com.axna.tile.engine.map
                                         (tile.VerticalFlip ? SpriteEffects.FlipVertically : SpriteEffects.None),
                                 depth: 1.0f,
                                 scale: 1.0f);
-                            /*
-                            AXNA.SpriteBatch.DrawRectangle(destPoint, new Vector2(64, 64),
-                                new Color(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255)));
-                             */
                         }
                     }
                 }

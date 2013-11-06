@@ -25,7 +25,7 @@ namespace AXNAEngine.com.testgame
         {
             var tmxFormatData = new TmxMap(
                 //                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/IsometricMap.tmx"));
-                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap2.tmx"));
+                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap.tmx"));
 
             var tileset = new TileSet(
                 AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part4_tileset"),

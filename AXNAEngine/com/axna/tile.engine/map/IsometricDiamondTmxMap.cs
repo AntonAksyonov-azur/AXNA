@@ -21,11 +21,11 @@ namespace AXNAEngine.com.axna.tile.engine.map
                 Camera.Location.Y / TileSet.TileStepY);
             var firstX = (int) firstSquare.X;
             var firstY = (int) firstSquare.Y;
-
+            /*
             var squareOffset = new Vector2(
-                Camera.Location.X % TileSet.TileStepX / 2,
-                Camera.Location.Y % TileSet.TileStepY / 2);
-
+                Camera.Location.X % TileSet.TileStepX,
+                Camera.Location.Y % TileSet.TileStepY);
+            */
             foreach (var layer in _tmxFormatData.Layers)
             {
                 if (!layer.Visible) continue;
@@ -40,8 +40,8 @@ namespace AXNAEngine.com.axna.tile.engine.map
                         if (gid > -1)
                         {
                             var destPoint = new Vector2(
-                                ((x - y) * (float) TileSet.TileStepX / 2) - squareOffset.X + Position.X,
-                                ((x + y) * (float) TileSet.TileStepY / 2) - squareOffset.Y + Position.Y);
+                                ((x - y) * (float) TileSet.TileStepX / 2) + Position.X,
+                                ((x + y) * (float) TileSet.TileStepY / 2) + Position.Y);
 
                             AXNA.SpriteBatch.Draw(
                                 texture: TileSet.TileSetTexture,

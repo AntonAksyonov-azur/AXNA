@@ -33,8 +33,7 @@ namespace AXNAEngine.com.testgame
             AddEntity(new GraphicEntity(new Image(null), 0, 32 * 8));
 
             var tmxFormatData = new TmxMap(
-//                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/IsometricMap.tmx"));
-                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap2.tmx"));
+                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap.tmx"));
 
             var tileset = new TileSet(
                 AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part4_tileset"),
@@ -46,11 +45,10 @@ namespace AXNAEngine.com.testgame
             _tileMapCamera = new TileMapCamera(50, 50);
 
             _map =
-//                new IsometricDiamondTmxMap(new Vector2(400, 0), tileset, tmxFormatData, _tileMapCamera);
-                new IsometricZigZagTmxMap(new Vector2(0, 0), tileset, tmxFormatData, _tileMapCamera);
+                new IsometricZigZagTmxMap(new Vector2(-64, -64), tileset, tmxFormatData, _tileMapCamera);
             AddEntity(_map);
 
-            _tileMapScrollSpeed = tileset.TileWidth * 3;
+            _tileMapScrollSpeed = tileset.TileWidth;
         }
 
         public override void OnUpdate(GameTime gameTime)
