@@ -57,6 +57,7 @@
     <Compile Include="com\axna\managers\WorldManager.cs" />
     <Compile Include="com\axna\extension\net\DictionaryExtension.cs" />
     <Compile Include="com\axna\extension\net\RandomExtension.cs" />
+    <Compile Include="com\axna\tile.engine\FogOfWarMap.cs" />
     <Compile Include="com\axna\tile.engine\map\AbstractTileMap.cs" />
     <Compile Include="com\axna\tile.engine\map\HexArrayTileMap.cs" />
     <Compile Include="com\axna\tile.engine\map\IsometricDiamondTmxMap.cs" />
@@ -155,6 +156,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Base\Arial.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Textures\Tiles\FogOfWar\fogofwar.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Textures\Tiles\FogOfWar\FogOfWarIsometric.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Textures\Tiles\FogOfWar\FogOfWarIsometric_blurry.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Content\Textures\Tiles\part1_tileset.xnb">

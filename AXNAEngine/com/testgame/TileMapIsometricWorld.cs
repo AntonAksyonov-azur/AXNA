@@ -22,9 +22,12 @@ namespace AXNAEngine.com.testgame
         private Vector2 _oldMousePos;
         private Vector2 _oldCameraPos;
         private bool _isMouseDrag;
+        private Point _lightPos;
+
 
         public TileMapIsometricWorld() : base("TileMapIsometricWorld")
         {
+            ClearColor = Color.Black;
         }
 
         public override void OnInitialize()
@@ -43,9 +46,13 @@ namespace AXNAEngine.com.testgame
                 32, 32);
 
             _tileMapCamera = new TileMapCamera(50, 50);
+            _tileMapCamera.Location = new Vector2(690, 0);
 
-            _map =
-                new IsometricZigZagTmxMap(new Vector2(-64, -64), tileset, tmxFormatData, _tileMapCamera);
+            _map = new IsometricZigZagTmxMap(Vector2.Zero, tileset, tmxFormatData, _tileMapCamera);
+            _lightPos = new Point(15, 20);
+            _map.SetupFogOfWar(_lightPos, 4, AXNA.Content.Load<Texture2D>(@"Textures/Tiles/FogOfWar/FogOfWarIsometric"));
+           
+
             AddEntity(_map);
 
             _tileMapScrollSpeed = tileset.TileWidth;
@@ -119,6 +126,19 @@ namespace AXNAEngine.com.testgame
                         0,
                         (_map.MapHeight - _tileMapCamera.SquaresDown) * TileSize);
             }
+
+            // Fog of war
+            if (InputManager.IsKeyDown(Keys.S))
+            {
+                _map.SetFogOfWarLightPosition(
+                    new Point(_map.FogOfWarLightPosition.X, _map.FogOfWarLightPosition.Y + 1));
+            }
+            if (InputManager.IsKeyDown(Keys.W))
+            {
+                _map.SetFogOfWarLightPosition(
+                    new Point(_map.FogOfWarLightPosition.X, _map.FogOfWarLightPosition.Y - 1));
+            }
+
             base.OnUpdate(gameTime);
         }
     }
