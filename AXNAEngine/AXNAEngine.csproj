@@ -92,6 +92,7 @@
     <Compile Include="com\testgame\TiledMapRenderTargetWorld.cs" />
     <Compile Include="com\testgame\TileMapHexWorld.cs" />
     <Compile Include="com\testgame\TileMapIsometricWorld.cs" />
+    <Compile Include="com\testgame\TileMapOrtWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -164,8 +165,14 @@
     <None Include="Content\Textures\Tiles\FogOfWar\FogOfWarIsometric.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Textures\Tiles\FogOfWar\FogOfWarIsometricCircle.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Textures\Tiles\FogOfWar\FogOfWarIsometric_blurry.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Textures\Tiles\FogOfWar\fogofwar_black.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Textures\Tiles\part1_tileset.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

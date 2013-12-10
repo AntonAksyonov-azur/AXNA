@@ -38,6 +38,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
                         if (gid > -1)
                         {
                             var offsetX = tile.Y % 2 != 0 ? TileSet.TileWidth / 2 : 0;
+
                             var destPoint = new Vector2(
                                 (float) Math.Ceiling((x * TileSet.TileStepX) + offsetX - squareOffset.X + Position.X),
                                 (float)
@@ -60,21 +61,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
             }
         }
 
-        private Vector2 DetermineOffset()
-        {
-            return new Vector2(
-                Camera.Location.X % TileSet.TileStepX,
-                Camera.Location.Y % TileSet.TileStepY);
-        }
-
-        private Vector2 DetermineCameraBorders()
-        {
-            var firstSquare = new Vector2(
-                Camera.Location.X / TileSet.TileStepX,
-                Camera.Location.Y / TileSet.TileStepY);
-
-            return firstSquare;
-        }
+        public float FogRes = 0.5f;
 
         public override void DrawFogOfWar(GameTime gameTime)
         {
@@ -82,9 +69,11 @@ namespace AXNAEngine.com.axna.tile.engine.map
             var squareOffset = DetermineOffset();
             var rS = FogOfWarLightRadius * FogOfWarLightRadius;
 
-            for (int y = -CameraFogOfWarBonus; y < Camera.SquaresDown + CameraFogOfWarBonus; y++)
+            FogRes = MathHelper.Clamp(FogRes, 0.1f, 1.0f);
+
+            for (float y = -CameraFogOfWarBonus; y < Camera.SquaresDown + CameraFogOfWarBonus; y += FogRes)
             {
-                for (int x = -CameraFogOfWarBonus; x < Camera.SquaresAcross + CameraFogOfWarBonus; x++)
+                for (float x = -CameraFogOfWarBonus; x < Camera.SquaresAcross + CameraFogOfWarBonus; x += FogRes)
                 {
                     var tileMapCoordinateY = y + (int) cameraBorders.Y;
                     var tileMapCoordinateX = x + (int) cameraBorders.X;
@@ -96,7 +85,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
                         var offsetX = tileMapCoordinateY % 2 != 0 ? TileSet.TileWidth / 2 : 0;
                         var destPoint = new Vector2(
                             (float) Math.Ceiling((x * TileSet.TileStepX) + offsetX - squareOffset.X + Position.X),
-                            (float) Math.Ceiling((y * (float) TileSet.TileStepY / 2) - squareOffset.Y / 2 + Position.Y));
+                            (float) Math.Ceiling((y * TileSet.TileStepY / 2) - squareOffset.Y / 2 + Position.Y));
 
                         AXNA.SpriteBatch.Draw(
                             texture: FogOfWarTexture,

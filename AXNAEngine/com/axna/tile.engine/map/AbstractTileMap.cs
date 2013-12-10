@@ -69,5 +69,21 @@ namespace AXNAEngine.com.axna.tile.engine.map
         {
             throw new Exception("Usage of base method");
         }
+
+        protected Vector2 DetermineOffset()
+        {
+            return new Vector2(
+                Camera.Location.X % TileSet.TileStepX,
+                Camera.Location.Y % TileSet.TileStepY);
+        }
+
+        protected Vector2 DetermineCameraBorders()
+        {
+            var firstSquare = new Vector2(
+                Camera.Location.X / TileSet.TileStepX,
+                Camera.Location.Y / TileSet.TileStepY);
+
+            return firstSquare;
+        }
     }
 }

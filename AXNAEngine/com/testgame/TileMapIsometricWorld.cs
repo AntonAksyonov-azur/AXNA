@@ -50,8 +50,8 @@ namespace AXNAEngine.com.testgame
 
             _map = new IsometricZigZagTmxMap(Vector2.Zero, tileset, tmxFormatData, _tileMapCamera);
             _lightPos = new Point(15, 20);
-            _map.SetupFogOfWar(_lightPos, 4, AXNA.Content.Load<Texture2D>(@"Textures/Tiles/FogOfWar/FogOfWarIsometric"));
-           
+            //_map.SetupFogOfWar(_lightPos, 4, AXNA.Content.Load<Texture2D>(@"Textures/Tiles/FogOfWar/FogOfWarIsometric"));
+
 
             AddEntity(_map);
 
@@ -128,15 +128,35 @@ namespace AXNAEngine.com.testgame
             }
 
             // Fog of war
-            if (InputManager.IsKeyDown(Keys.S))
+            if (InputManager.IsKeyPressed(Keys.S))
             {
                 _map.SetFogOfWarLightPosition(
                     new Point(_map.FogOfWarLightPosition.X, _map.FogOfWarLightPosition.Y + 1));
             }
-            if (InputManager.IsKeyDown(Keys.W))
+            if (InputManager.IsKeyPressed(Keys.W))
             {
                 _map.SetFogOfWarLightPosition(
                     new Point(_map.FogOfWarLightPosition.X, _map.FogOfWarLightPosition.Y - 1));
+            }
+            if (InputManager.IsKeyPressed(Keys.A))
+            {
+                _map.SetFogOfWarLightPosition(
+                    new Point(_map.FogOfWarLightPosition.X - 1, _map.FogOfWarLightPosition.Y));
+            }
+            if (InputManager.IsKeyPressed(Keys.D))
+            {
+                _map.SetFogOfWarLightPosition(
+                    new Point(_map.FogOfWarLightPosition.X + 1, _map.FogOfWarLightPosition.Y));
+            }
+
+
+            if (InputManager.IsKeyPressed(Keys.R))
+            {
+                (_map as IsometricZigZagTmxMap).FogRes += 0.1f;
+            }
+            if (InputManager.IsKeyPressed(Keys.F))
+            {
+                (_map as IsometricZigZagTmxMap).FogRes -= 0.1f;
             }
 
             base.OnUpdate(gameTime);
