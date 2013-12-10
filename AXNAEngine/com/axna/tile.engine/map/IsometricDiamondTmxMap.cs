@@ -14,6 +14,47 @@ namespace AXNAEngine.com.axna.tile.engine.map
             _tmxFormatData = tmxFormatData;
         }
 
+        public override void Draw(GameTime gameTime)
+        {
+            foreach (var layer in _tmxFormatData.Layers)
+            {
+                if (!layer.Visible) continue;
+
+                for (int y = 0; y < _tmxFormatData.Height; y++)
+                {
+                    for (int x = 0; x < _tmxFormatData.Width; x++)
+                    {
+                        var tile = layer.Tiles[(y) * _tmxFormatData.Height + (x)];
+                        var gid = tile.Gid - 1;
+
+                        if (gid > -1)
+                        {
+                            var destPoint = new Vector2(
+                                ((x - y) * (float) TileSet.TileStepX / 2) + Position.X,
+                                ((x + y) * (float) TileSet.TileStepY / 2) + Position.Y);
+
+                            AXNA.SpriteBatch.Draw(
+                                texture: TileSet.TileSetTexture,
+                                position: destPoint,
+                                sourceRectangle: TileSet.GetSourceRectangle(gid),
+                                color: MouseOverlapTile(x,y) ? Color.Red : Color.White,
+                                rotation: 0.0f,
+                                origin: Vector2.Zero,
+                                effect: (tile.HorizontalFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None) |
+                                        (tile.VerticalFlip ? SpriteEffects.FlipVertically : SpriteEffects.None),
+                                depth: 1.0f,
+                                scale: 1.0f);
+                        }
+                    }
+                }
+            }
+        }
+
+        private bool MouseOverlapTile(int x, int y)
+        {
+            return false;
+        }
+
         public override void DrawMap(GameTime gameTime)
         {
             var firstSquare = new Vector2(

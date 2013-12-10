@@ -9,6 +9,7 @@ using AXNAEngine.com.axna.tile.engine.map;
 using AXNAEngine.com.axna.worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using TiledSharp;
 
 namespace AXNAEngine.com.testgame.tilemaps
@@ -43,9 +44,9 @@ namespace AXNAEngine.com.testgame.tilemaps
                 32, 32);
 
             var cameraPosition = new Vector2(0, 0);
-            var mapPosition = new Vector2(500, 0);
+            var mapPosition = new Vector2(400, 100);
 
-            _tileMapCamera = new TileMapCamera(50, 50) { Location = cameraPosition };
+            _tileMapCamera = new TileMapCamera(10, 10) { Location = cameraPosition };
 
             _map = new IsometricDiamondTmxMap(mapPosition, tileset, tmxFormatData, _tileMapCamera);
             _lightPos = new Point(15, 20);
@@ -59,6 +60,8 @@ namespace AXNAEngine.com.testgame.tilemaps
         public override void OnUpdate(GameTime gameTime)
         {
             MouseDrag();
+
+            AXNA.Game.Window.Title = String.Format("Mouse: {0}:{1}", InputManager.GetMouseX(), InputManager.GetMouseY());
 
             base.OnUpdate(gameTime);
         }

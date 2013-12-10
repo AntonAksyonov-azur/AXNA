@@ -33,7 +33,7 @@ namespace AXNAEngine.com.testgame.tilemaps
         public override void OnInitialize()
         {
             var tmxFormatData = new TmxMap(
-                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap.tmx"));
+                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZag.tmx"));
 
             var tileset = new TileSet(
                 AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part4_tileset"),
@@ -43,9 +43,9 @@ namespace AXNAEngine.com.testgame.tilemaps
                 32, 32);
 
             _tileMapCamera = new TileMapCamera(50, 50);
-            _tileMapCamera.Location = new Vector2(690, 0);
+            _tileMapCamera.Location = new Vector2(0, 0);
 
-            _map = new IsometricZigZagTmxMap(Vector2.Zero, tileset, tmxFormatData, _tileMapCamera);
+            _map = new IsometricZigZagTmxMap(new Vector2(0,0), tileset, tmxFormatData, _tileMapCamera);
             _lightPos = new Point(15, 20);
             //_map.SetupFogOfWar(_lightPos, 4, AXNA.Content.Load<Texture2D>(@"Textures/Tiles/FogOfWar/FogOfWarIsometric"));
 

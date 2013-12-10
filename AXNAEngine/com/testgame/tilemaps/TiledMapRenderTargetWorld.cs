@@ -17,14 +17,14 @@ namespace AXNAEngine.com.testgame.tilemaps
         private AbstractTileMap _map;
 
         public TiledMapRenderTargetWorld()
-            : base("w123", new Point(800, 600), new Rectangle(0, 0, 800, 600))
+            : base("w123", new Point(6400, 3200), new Rectangle(0, 0, 800, 600))
         {
         }
 
         public override void OnInitialize()
         {
             var tmxFormatData = new TmxMap(
-                               string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/BigDiamond.tmx"));
+                               string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/Diamond.tmx"));
                 // string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap.tmx"));
 
             var tileset = new TileSet(
@@ -37,7 +37,7 @@ namespace AXNAEngine.com.testgame.tilemaps
             var tileMapCamera = new TileMapCamera(50, 50);
 
             _map =
-                new IsometricDiamondTmxMap(new Vector2(400, 0), tileset, tmxFormatData, tileMapCamera);
+                new IsometricDiamondTmxMap(new Vector2(0, 0), tileset, tmxFormatData, tileMapCamera);
             //                new IsometricZigZagTmxMap(new Vector2(0, 0), tileset, tmxFormatData, _tileMapCamera);
             AddEntity(_map);
 
@@ -50,15 +50,15 @@ namespace AXNAEngine.com.testgame.tilemaps
             {
                 _isMouseDrag = true;
 
-                _oldCameraPos = new Vector2(-_map.Position.X, -_map.Position.Y);
+                _oldCameraPos = new Vector2(CameraRectangle.X, CameraRectangle.Y);
                 _oldMousePos = InputManager.MousePositionToVector2();
             }
 
             if (_isMouseDrag)
             {
                 var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.MousePositionToVector2();
-                _map.Position.X = -(int) newCameraPos.X;
-                _map.Position.Y = -(int) newCameraPos.Y;
+                CameraRectangle.X = (int)newCameraPos.X;
+                CameraRectangle.Y = (int)newCameraPos.Y;
             }
 
             if (InputManager.IsMouseLeftUp() && _isMouseDrag)
