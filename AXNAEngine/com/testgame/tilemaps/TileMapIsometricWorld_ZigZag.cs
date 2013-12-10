@@ -10,9 +10,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TiledSharp;
 
-namespace AXNAEngine.com.testgame
+namespace AXNAEngine.com.testgame.tilemaps
 {
-    public class TileMapIsometricWorld : World
+    public class TileMapIsometricWorld_ZigZag : World
     {
         private const int TileSize = 64;
 
@@ -25,16 +25,13 @@ namespace AXNAEngine.com.testgame
         private Point _lightPos;
 
 
-        public TileMapIsometricWorld() : base("TileMapIsometricWorld")
+        public TileMapIsometricWorld_ZigZag() : base("TileMapIsometricWorld_ZigZag")
         {
             ClearColor = Color.Black;
         }
 
         public override void OnInitialize()
         {
-            AddEntity(new GraphicEntity(new Image(null), 0, 0));
-            AddEntity(new GraphicEntity(new Image(null), 0, 32 * 8));
-
             var tmxFormatData = new TmxMap(
                 string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap.tmx"));
 
@@ -60,34 +57,7 @@ namespace AXNAEngine.com.testgame
 
         public override void OnUpdate(GameTime gameTime)
         {
-            if (InputManager.IsMouseLeftDown() && !_isMouseDrag)
-            {
-                _isMouseDrag = true;
-
-                _oldCameraPos = _tileMapCamera.Location;
-                _oldMousePos = InputManager.MousePositionToVector2();
-            }
-
-            if (_isMouseDrag)
-            {
-                var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.MousePositionToVector2();
-                var vectorZero = Vector2.Zero;
-                var vectorBorder = new Vector2(
-                    (_map.MapWidth - _tileMapCamera.SquaresAcross) * 64,
-                    (_map.MapHeight - _tileMapCamera.SquaresDown) * 32);
-
-                Vector2.Clamp(
-                    ref newCameraPos,
-                    ref vectorZero,
-                    ref vectorBorder,
-                    out _tileMapCamera.Location);
-            }
-
-            if (InputManager.IsMouseLeftUp() && _isMouseDrag)
-            {
-                _isMouseDrag = false;
-            }
-
+            MouseDrag();
 
             var speed = _tileMapScrollSpeed * AXNA.GetTimeIntervalValue(gameTime);
 
@@ -160,6 +130,37 @@ namespace AXNAEngine.com.testgame
             }
 
             base.OnUpdate(gameTime);
+        }
+
+        private void MouseDrag()
+        {
+            if (InputManager.IsMouseLeftDown() && !_isMouseDrag)
+            {
+                _isMouseDrag = true;
+
+                _oldCameraPos = _tileMapCamera.Location;
+                _oldMousePos = InputManager.MousePositionToVector2();
+            }
+
+            if (_isMouseDrag)
+            {
+                var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.MousePositionToVector2();
+                var vectorZero = Vector2.Zero;
+                var vectorBorder = new Vector2(
+                    (_map.MapWidth - _tileMapCamera.SquaresAcross) * 64,
+                    (_map.MapHeight - _tileMapCamera.SquaresDown) * 32);
+
+                Vector2.Clamp(
+                    ref newCameraPos,
+                    ref vectorZero,
+                    ref vectorBorder,
+                    out _tileMapCamera.Location);
+            }
+
+            if (InputManager.IsMouseLeftUp() && _isMouseDrag)
+            {
+                _isMouseDrag = false;
+            }
         }
     }
 }

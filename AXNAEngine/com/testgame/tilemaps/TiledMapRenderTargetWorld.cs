@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TiledSharp;
 
-namespace AXNAEngine.com.testgame
+namespace AXNAEngine.com.testgame.tilemaps
 {
     public class TiledMapRenderTargetWorld : RenderTargetWorld
     {
@@ -24,8 +24,8 @@ namespace AXNAEngine.com.testgame
         public override void OnInitialize()
         {
             var tmxFormatData = new TmxMap(
-                //                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/IsometricMap.tmx"));
-                string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap.tmx"));
+                               string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/BigDiamond.tmx"));
+                // string.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ZigZagMap.tmx"));
 
             var tileset = new TileSet(
                 AXNA.Content.Load<Texture2D>(@"Textures/Tiles/part4_tileset"),
@@ -57,8 +57,8 @@ namespace AXNAEngine.com.testgame
             if (_isMouseDrag)
             {
                 var newCameraPos = _oldCameraPos + _oldMousePos - InputManager.MousePositionToVector2();
-                _map.Position.X = -(int)newCameraPos.X;
-                _map.Position.Y = -(int)newCameraPos.Y;
+                _map.Position.X = -(int) newCameraPos.X;
+                _map.Position.Y = -(int) newCameraPos.Y;
             }
 
             if (InputManager.IsMouseLeftUp() && _isMouseDrag)

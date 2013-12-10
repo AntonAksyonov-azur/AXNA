@@ -2,6 +2,7 @@ using System;
 using AXNAEngine.com.axna;
 using AXNAEngine.com.axna.worlds;
 using AXNAEngine.com.testgame;
+using AXNAEngine.com.testgame.tilemaps;
 
 namespace AXNAEngine
 {
@@ -15,8 +16,10 @@ namespace AXNAEngine
         {
             Engine game = new Engine(800, 600);
 
-           // AXNA.WorldManager.ActivateWorld(new TileMapOrtWorld());
-            AXNA.WorldManager.ActivateWorld(new TileMapIsometricWorld());
+           // AXNA.WorldManager.ActivateWorld(new TileMapOrthogonalWorld());
+//            AXNA.WorldManager.ActivateWorld(new TileMapIsometricWorld_ZigZag());
+            AXNA.WorldManager.ActivateWorld(new TileMapIsometricWorld_Diamond());
+            
 //            AXNA.WorldManager.ActivateWorld(new TileMapHexWorld());
 //            AXNA.WorldManager.ActivateWorld(new TestWorld());
 //            AXNA.WorldManager.ActivateWorld(new TiledMapRenderTargetWorld());

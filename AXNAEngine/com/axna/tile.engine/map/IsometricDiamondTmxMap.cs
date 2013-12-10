@@ -14,7 +14,7 @@ namespace AXNAEngine.com.axna.tile.engine.map
             _tmxFormatData = tmxFormatData;
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void DrawMap(GameTime gameTime)
         {
             var firstSquare = new Vector2(
                 Camera.Location.X / TileSet.TileStepX,

@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TiledSharp;
 
-namespace AXNAEngine.com.testgame
+namespace AXNAEngine.com.testgame.tilemaps
 {
-    public class TileMapOrtWorld : World
+    public class TileMapOrthogonalWorld : World
     {
         private OrtogonalTmxTileMap _map;
         private TileMapCamera _tileMapCamera;
@@ -19,7 +19,7 @@ namespace AXNAEngine.com.testgame
         private Vector2 _oldCameraPos;
         private bool _isMouseDrag;
 
-        public TileMapOrtWorld() : base("OrthographicTileMap")
+        public TileMapOrthogonalWorld() : base("OrthographicTileMap")
         {
         }
 
@@ -31,8 +31,9 @@ namespace AXNAEngine.com.testgame
                 new TileSet(AXNA.Content.Load<Texture2D>(@"Textures\Tiles\part2_tileset"), 48, 48),
                 new TmxMap(String.Format(@"{0}/{1}", AXNA.Content.RootDirectory, @"Tilemaps/ExampleMap.tmx")),
                 _tileMapCamera);
-            
-            _map.SetupFogOfWar(new Point(5, 5), 2, AXNA.Content.Load<Texture2D>(@"Textures\Tiles\FogOfWar\fogofwar_black"));
+
+            _map.SetupFogOfWar(new Point(5, 5), 2,
+                AXNA.Content.Load<Texture2D>(@"Textures\Tiles\FogOfWar\fogofwar_black"));
 
             AddEntity(_map);
         }
